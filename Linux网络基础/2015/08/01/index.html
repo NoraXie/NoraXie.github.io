@@ -1,0 +1,747 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="TCP/IP,路由表,交换机,Mac地址," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/img/favicon.png?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="引言随着移动互联网的疯长式发展,互联网公司开始因为自身产品的用户指数级增长的同时,内心是复杂的.用户量的增加往往会给自己的产品提升知名度和经济效益.另一方面,超大用户访问量也给系统的维护和开始带来了挑战.目前国内面临着巨大高并发的企业典型的有两家,12306和阿里的各种购物狂欢节.2011年的时候12306还在春运时遭到广大刷票党的吐槽,到15年的今天,12306一点一点的在进步着.而淘宝每年的双">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux网络基础">
+<meta property="og:url" content="http://xpercent.coding.me/Linux网络基础/2015/08/01/index.html">
+<meta property="og:site_name" content="Xpercent">
+<meta property="og:description" content="引言随着移动互联网的疯长式发展,互联网公司开始因为自身产品的用户指数级增长的同时,内心是复杂的.用户量的增加往往会给自己的产品提升知名度和经济效益.另一方面,超大用户访问量也给系统的维护和开始带来了挑战.目前国内面临着巨大高并发的企业典型的有两家,12306和阿里的各种购物狂欢节.2011年的时候12306还在春运时遭到广大刷票党的吐槽,到15年的今天,12306一点一点的在进步着.而淘宝每年的双">
+<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/net-0.jpg">
+<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/net-1.png">
+<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/net-5.png">
+<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/net-2.png">
+<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/net-4.png">
+<meta property="og:updated_time" content="2016-12-13T17:29:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux网络基础">
+<meta name="twitter:description" content="引言随着移动互联网的疯长式发展,互联网公司开始因为自身产品的用户指数级增长的同时,内心是复杂的.用户量的增加往往会给自己的产品提升知名度和经济效益.另一方面,超大用户访问量也给系统的维护和开始带来了挑战.目前国内面临着巨大高并发的企业典型的有两家,12306和阿里的各种购物狂欢节.2011年的时候12306还在春运时遭到广大刷票党的吐槽,到15年的今天,12306一点一点的在进步着.而淘宝每年的双">
+<meta name="twitter:image" content="http://xpercent.coding.me/assets/blogImg/net-0.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://xpercent.coding.me/Linux网络基础/2015/08/01/"/>
+
+
+
+
+
+  <title> Linux网络基础 | Xpercent </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Xpercent</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">发现，探索，专注</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://xpercent.coding.me/Linux网络基础/2015/08/01/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Xpercent">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/assets/blogImg/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Xpercent">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Xpercent" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Linux网络基础
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-01T18:51:47+08:00">
+                2015-08-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/计算机网络/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机网络</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>随着移动互联网的疯长式发展,互联网公司开始因为自身产品的用户指数级增长的同时,内心是复杂的.用户量的增加往往会给自己的产品提升知名度和经济效益.另一方面,超大用户访问量也给系统的维护和开始带来了挑战.目前国内面临着巨大高并发的企业典型的有两家,12306和阿里的各种购物狂欢节.2011年的时候12306还在春运时遭到广大刷票党的吐槽,到15年的今天,12306一点一点的在进步着.而淘宝每年的双11一天的进账就是千亿级,这么大的用户访问量是如何做到服务器不当机的呢.这里涉及到一个非常典型的问题,一台再好的服务器,带宽再强大也无法保证上亿的用户同时访问,可以说服务器是一个高并发时的瓶颈,如何解决这个瓶颈?阿里和12306是怎么克服这个问题的呢?作为开始工程师,我对此十分感兴趣,做了一些研究,并用Cisco Packet做了简单的模拟.</p>
+<p>在进一步解决服务器瓶颈问题之前,需要有具备一些基础的计算机网络知识,理解这些基本概念.这是解决高并发问题的一个基本前提,离开这个根基,去谈集群就是耍流氓.</p>
+<p><img src="/assets/blogImg/net-0.jpg" alt=""></p>
+<a id="more"></a>
+<blockquote>
+<p>知识准备</p>
+</blockquote>
+<ol>
+<li>计算机两种分层结构OSI和ISO</li>
+<li>IP地址/子网掩码</li>
+<li>网关/默认网关</li>
+<li>TCP连接的三次握手与四次分手</li>
+<li>数据包/mac地址/端口号</li>
+<li>路由器</li>
+<li>交换机</li>
+<li>网卡</li>
+</ol>
+<h2 id="互联网中计算机间的通信"><a href="#互联网中计算机间的通信" class="headerlink" title="互联网中计算机间的通信"></a>互联网中计算机间的通信</h2><blockquote>
+<p>名词解释</p>
+</blockquote>
+<p>host1 — 主机1(可以理解成互联网中做任意一台电脑)<br>host2 — 主机2<br>host3 — 主机3   </p>
+<p>switcher1 — 交换机(物理设备,二层,只看目标与源的mac地址与端口)  </p>
+<p>router1 — 路由器(三层,看目标与源的IP地址)</p>
+<p>网卡 — 物理设备,维护着一个IP地址,该地址与一个mac地址是绑定关系.</p>
+<p>任意两台主机想要通信,需要先互发数据包,进行三次握手,成功建立连接后,再由请求主机向目标主机发送数据包.这是一个互联网请求的大前提.</p>
+<blockquote>
+<p>假如有一台主机host1, 它本地维护着一张路由表,数据结构如下</p>
+</blockquote>
+<p><img src="/assets/blogImg/net-1.png" alt=""></p>
+<blockquote>
+<p>host1与host2通信</p>
+</blockquote>
+<p>Step1: 确认要发送的数据包三大内容,mac地址,IP地址,端口.</p>
+<p>Step2: 发送数据包建立进行三次握手,这是关于最小网络连接的导图.一个简单的http请求,必须完成的最小粒度应该是三次握手—数据—四次分手.只有双方主机都确认分手以后,客户端才会释放本次连接使用的端口号,以节省资源.</p>
+<p><img src="/assets/blogImg/net-5.png" alt=""></p>
+<p>Step3: 发送真实数据,下图显示了其发送数据的过程.图中host1与host2处于同一个网段中,中间只连了一台交换机,于是直接将数据包扔给交换机,交换机通过物理网卡收发数据,这个速度无疑是非常快的.具体过程下图有详细说明.</p>
+<p><img src="/assets/blogImg/net-2.png" alt=""></p>
+<blockquote>
+<p>host1与Host3通信</p>
+</blockquote>
+<p>step1与step2同上.</p>
+<p>step3:host1与host3不在同一个网段,因此在确认数据包时,需要取网关的mac地址;此后host1将请求数据扔给肉头,也就是router1.这后router1要做的事情是重复操作step1,step2,step3,直到找到目标主机.如果目标主机根本不存在,那么连接会超时.过程分析图如下.</p>
+<p><img src="/assets/blogImg/net-4.png" alt=""></p>
+<h2 id="服务器的瓶颈"><a href="#服务器的瓶颈" class="headerlink" title="服务器的瓶颈"></a>服务器的瓶颈</h2><p>设计一个极简单的web网站, 很容易搭建.一台服务器,上面放着用户可以查看和获取的所有资源文件,图片,视频和日记等等.这个模型十分简单就实现了网络访问,但也存在问题,当你在为网站做了大量推广时,用户量形如猛增,同一时间的访问量也开始大起来,一天长1000个(假设这个网站做的不错,用户不会流失),三个月后,这台服务器就开始会变得力不从心.用户开始反馈访问页面总是404.这就是高并发导致的服务器.</p>
+<blockquote>
+<p>这个现象揭示了两个问题</p>
+</blockquote>
+<ol>
+<li>用户访问量大的时候,服务器甚至都无法保证与每个请求建立连接.</li>
+<li>当用户请求的数据量大的时候,服务器有限的IO,会导致往外写数据十分缓慢.</li>
+</ol>
+<blockquote>
+<p>解决办法1</p>
+</blockquote>
+<p>既然一台服务器已经无法满足海量用户的访问,那么就多买几台服务器好了,用户多起来,就不在乎这点投入的.话说顾客是上帝,互联网时代,用户群就是王道.</p>
+<p>但是这依然有很多问题.比如:</p>
+<ol>
+<li>你有多台服务器,用户请求的地址始终都是同一个域名这个请求最终该由哪台服务器响应呢?</li>
+<li>即使现在的域名解析支持一个域名绑定多个IP地址.那这个IP地址就必须是公网IP,而公网IP资源有限,一台服务器一个公网IP,显然不是良策.</li>
+</ol>
+<blockquote>
+<p>解决办法2</p>
+</blockquote>
+<p>既然不能用公网IP,那么就在这些服务器与客户端之间再搭一台中间服务器,这台服务器负责持有公网IP,然后将用户请求的数据转发给其后的真实负服务器,即可.</p>
+<p>这种解决方案,会遇到一个网络技术问题.</p>
+<p>用户在发送请求时,首先会给中间服务器发送数据包,进行三次握手,这个过程建立连接的是用户与中间服务器.这就会导致负载服务器给用户发送响应数据时,是不合法的连接,将被用户丢弃.</p>
+<blockquote>
+<p>解决办法3</p>
+</blockquote>
+<p>其实这个问题在实际生活中,早在1998年国内就有人提出了解决方案,那就是章文嵩士提出的LVS虚拟服务器.</p>
+<p>它是这么解决的.</p>
+<p>中间服务器D(10.211.55.2)收到用户C1(192.168.1.100)的请求数据包后,只是拆包,将目标的mac地址修改到自己网段中一台真实服务器RS1,然后将数据包打好后发给RS1.</p>
+<p>这台RS1收到数据后,判断请求信息,其中源信息和目标信息本地都拥有,于是给予自己直接给用户发送确认连接.而收到请求的用户C1,再次向中间服务器D发送确认连接的数据包.最终建立TCP连接的是C1与RS1.这样就使得RS的收发数据变得合理合法与高效.</p>
+<p>这就是著名的<strong>LVS(Linux Virtual Server).</strong></p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>有幸的是LVS被Linux内核收录,只要你的主机上运行着Linux内核,就自带有LVS软件服务,这很容易让有需求了解LVS的人自己动手搭一个集群,模拟这种负载均衡技术.</p>
+<p>这将在明天的博文中更新,会有大概三种LVS实现方式.</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TCP-IP/" rel="tag"># TCP/IP</a>
+          
+            <a href="/tags/路由表/" rel="tag"># 路由表</a>
+          
+            <a href="/tags/交换机/" rel="tag"># 交换机</a>
+          
+            <a href="/tags/Mac地址/" rel="tag"># Mac地址</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/Hexo博客之自定义域名/2015/07/13/" rel="next" title="Hexo博客之自定义域名">
+                <i class="fa fa-chevron-left"></i> Hexo博客之自定义域名
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Linux与操作系统浅识/2015/08/10/" rel="prev" title="Linux与操作系统浅识">
+                Linux与操作系统浅识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/assets/blogImg/avatar.png"
+               alt="Xpercent" />
+          <p class="site-author-name" itemprop="name">Xpercent</p>
+          <p class="site-description motion-element" itemprop="description">专业专注专一的寡淡之人,简称寡人!</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#互联网中计算机间的通信"><span class="nav-number">2.</span> <span class="nav-text">互联网中计算机间的通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务器的瓶颈"><span class="nav-number">3.</span> <span class="nav-text">服务器的瓶颈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结束语"><span class="nav-number">4.</span> <span class="nav-text">结束语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Xpercent</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
