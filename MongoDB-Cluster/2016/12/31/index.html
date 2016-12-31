@@ -92,7 +92,9 @@
 <meta property="og:description" content="NoSQL概述随着互联网的高速发展,传统的面向关系型数据库渐渐无法满足高速实时 PB级 非结构化数据的存储.很快Not Only SQL数据库开始得到普遍的应用,如:面向文档的MongoDB,面向列的HBase/Cassandra,面向key-value的Redis,以及基于图像的Neo4j等.但是NoSQL旨在强调Key-Value和文档数据库的优点,并非单纯的反对关系型数据库.">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/mongodb-1.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/mongo-00.png">
-<meta property="og:updated_time" content="2016-12-31T08:22:05.000Z">
+<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/mongodb-2.png">
+<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/mongodb-3.png">
+<meta property="og:updated_time" content="2016-12-31T09:31:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB Cluster">
 <meta name="twitter:description" content="NoSQL概述随着互联网的高速发展,传统的面向关系型数据库渐渐无法满足高速实时 PB级 非结构化数据的存储.很快Not Only SQL数据库开始得到普遍的应用,如:面向文档的MongoDB,面向列的HBase/Cassandra,面向key-value的Redis,以及基于图像的Neo4j等.但是NoSQL旨在强调Key-Value和文档数据库的优点,并非单纯的反对关系型数据库.">
@@ -361,9 +363,52 @@
 </blockquote>
 <p>MongoDB中一条记录对应一个文档,可以理解 成key-value键值对的数据结构.文档与JSON对象非常相似,一个文档中可以包括其它文档,数组.这里将MongoDB与SQL中的概念进行罗列与类比.</p>
 <p><img src="/assets/blogImg/mongo-00.png" alt=""></p>
-<table style="width=800px line-hight=40px"><tr><td>SQL术语/概念</td><td>MongoDB术语/概念</td><td>解释/说明</td></tr><tr><td>DATABASE</td><td>database</td><td>数据库</td></tr><tr><td>TABLE</td><td>collection</td><td>数据库表/集合</td></tr><tr><td>ROW</td><td>document</td><td>数据记录行/文档</td><br>  </tr><br>  <tr><br>    <td>COLUMN</td><br>    <td>field</td><br>    <td>数据字段/域</td><br>  </tr><br>  <tr><br>    <td>INDEX</td><br>    <td>index</td><br>    <td>索引</td><br>  </tr><br>  <tr><br>    <td>TABLE JOINS</td><br>    <td></td><br>    <td>表连接,MongoDB不支持</td><br>  </tr><br>  <tr><br>    <td>PRIMARY KEY</td><br>    <td>primary key</td><br>    <td>主键,MongoDB自动将_id字段设置为主键</td><br>  </tr><br></table>
-
-
+<table>
+<thead>
+<tr>
+<th>SQL术语/概念</th>
+<th>MongoDB术语/概念</th>
+<th>解释/说明  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DATABASE</td>
+<td>DATABASE</td>
+<td>数据库  </td>
+</tr>
+<tr>
+<td>TABLE</td>
+<td>COLLECTION</td>
+<td>数据库表/集合  </td>
+</tr>
+<tr>
+<td>ROW</td>
+<td>DOCUMENT</td>
+<td>数据记录行/文档  </td>
+</tr>
+<tr>
+<td>COLUMN</td>
+<td>FIELD</td>
+<td>数据字段/域  </td>
+</tr>
+<tr>
+<td>INDEX</td>
+<td>INDEX</td>
+<td>索引  </td>
+</tr>
+<tr>
+<td>TABLE JOINS</td>
+<td></td>
+<td>表连接,MongoDB不支持  </td>
+</tr>
+<tr>
+<td>PRIMARY KEY</td>
+<td>PRIMARY KEY</td>
+<td>主键,MongoDB自动将_id字段设置为主键  </td>
+</tr>
+</tbody>
+</table>
 <blockquote>
 <p>主要优点</p>
 </blockquote>
@@ -376,15 +421,93 @@
 <p><strong>Horizontal Scalability 水平扩展</strong></p>
 <p>所谓水平扩展是相对垂直扩展而言的.通常,当系统性能不足时,如硬盘空间不足或内存吃紧时,很容易想到给服务器升级硬件,但但往往硬件的升级会带来相对较高的成本,而且是无止境的.试想,GOOGLE的每一台服务器都是相同配置的硬件,那么GOOGLE就太不会过日子了.</p>
 <p>除了升级硬件,往往会选择多加几台配置相对较低的服务器,这就是水平扩展.MongoDB的replica sets对水平扩展有很好的支持,只需要在一台服务器上装上MongoDB,让它与其它replica sets在可达的网段中,启动这台server的mongod服务即可.</p>
-<h3 id="Hello-MongoDB"><a href="#Hello-MongoDB" class="headerlink" title="Hello MongoDB"></a>Hello MongoDB</h3><p>说了那么多,这里就根据官网的介绍装一台MongoDB跑起来,俗话说是螺子是马拉出来溜溜.</p>
+<h3 id="Hello-MongoDB"><a href="#Hello-MongoDB" class="headerlink" title="Hello MongoDB"></a>Hello MongoDB</h3><p>说了那么多,有点迫不急待的要去官网上找一下安装说明.我们也装一台MongoDB跑起来,俗话说是螺子是马拉出来溜溜.</p>
 <blockquote>
 <p>Note:</p>
 <ul>
-<li>不同的计算机环境,在搭建时步骤不尽相同,不可盲目根据他人的安装步骤操作,建议读者去官网找到与自己PC环境相同的安装说明.</li>
-<li>这是使用Linux Ret Hat CentOS6.5系统</li>
+<li>不同的计算机环境,在搭建时步骤不尽相同,不可盲目根据他人的安装步骤操作,建议读者去官网找到与自己PC环境相同的安装说明</li>
+<li>这是使用Linux Ret Hat CentOS6.5 64位系统</li>
 <li>MongoDB分社区版和企业版,普通用户自己玩玩就下个企业版足以.</li>
 </ul>
 </blockquote>
+<p><strong>Step1 修改系统包管理器(RHEL是yum)</strong></p>
+<hr>
+<p>在/etc/yum.repos.d/目录下创建一个文件命名为mongodb-org-3.4.repo,这样可以通过yum为我们在线安装mongodb-3.4</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> /etc/yum.repos.d</div><div class="line">$ sudo touch mongodb-org-3.4.repo</div><div class="line">$ sudo vi mongodb-org-3.4.repo</div></pre></td></tr></table></figure>
+<p>将这段内容复制到mongodb-org-3.4.repo中<br>&gt;<br>[mongodb-org-3.4]<br>name=MongoDB Repository<br>baseurl=<a href="https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/" target="_blank" rel="external">https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/</a><br>gpgcheck=1<br>enabled=1<br>gpgkey=<a href="https://www.mongodb.org/static/pgp/server-3.4.asc" target="_blank" rel="external">https://www.mongodb.org/static/pgp/server-3.4.asc</a></p>
+<p><strong>Step2 安装MongoDB包及其依赖工具</strong></p>
+<p>表格中列出了MongoDB包及其依赖工具,用户只需安装mongodb-org即可,yum会根据org中保存的元数据自动为我们安装server,mongos,shell和tools.</p>
+<table>
+<thead>
+<tr>
+<th>mongodb-org</th>
+<th>A metapackage that will automatically install the four component packages listed below.  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mongodb-org-server</td>
+<td>Contains the mongod daemon and associated configuration and init scripts.  </td>
+</tr>
+<tr>
+<td>mongodb-org-mongos</td>
+<td>Contains the mongos daemon.  </td>
+</tr>
+<tr>
+<td>mongodb-org-shell</td>
+<td>Contains the mongo shell.  </td>
+</tr>
+<tr>
+<td>mongodb-org-tools</td>
+<td>Contains the following MongoDB tools: mongoimport bsondump, mongodump, mongoexport, mongofiles, mongooplog, mongoperf, mongorestore, mongostat, and mongotop.  </td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo yum install mongodb-org -y</div></pre></td></tr></table></figure>
+<p><img src="/assets/blogImg/mongodb-2.png" alt=""></p>
+<blockquote>
+<p>NOTE<br>  mongodb-org-server包为mongod服务启动提供了自动化脚本,用户可以根据配置文件修改mongod服务.这个配置文件是/etc/mongod.conf,该文件默认将bind_ip设置为127.0.0.1,通常在搭建集群时,需要修改为用户在/etc/sysconfig/network文件中设置的主机名.否则,集群在初始化时,将无法识别这台主机.</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ sudo vi /etc/sysconfig/network  </div><div class="line">  <span class="comment"># 主机ip 自己随意写一个主机</span></div><div class="line">  <span class="comment"># 如:10.211.55.111 mongodb1</span></div><div class="line">$ sudo vi /etc/mongod.conf</div><div class="line">  <span class="comment"># bindIp mongodb1</span></div></pre></td></tr></table></figure>
+<p><strong>Step3 测试MongoDB</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ sudo service mongod start</div><div class="line">$ sudo service mongod status</div><div class="line"><span class="comment"># mongod(pid 进程号)is running</span></div><div class="line"><span class="comment"># 显示如上即安装成功</span></div></pre></td></tr></table></figure>
+<p><strong>Step4 搭建MongoDB Replica Sets</strong></p>
+<blockquote>
+<p>集群结构与环境准备</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>zk1</th>
+<th>zk2</th>
+<th>zk3  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.211.55.111</td>
+<td>10.211.55.112</td>
+<td>10.211.55.113</td>
+</tr>
+<tr>
+<td>mongodb-org</td>
+<td>mongodb-org</td>
+<td>mongodb-org</td>
+</tr>
+<tr>
+<td>mongod start</td>
+<td>mongod start</td>
+<td>mongod start</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>测试MongoDB之间的通信</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 在zk1上测试与zk2,zk3的通信</span></div><div class="line">$ sudo mongo --host zk2 --port 27107</div><div class="line">$ sudo mongo --host zk3 --port 27017</div></pre></td></tr></table></figure>
+<p>同理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 在zk2上测试与zk1,zk3的通信</span></div><div class="line">$ sudo mongo --host zk1 --port 27107</div><div class="line">$ sudo mongo --host zk3 --port 27017</div></pre></td></tr></table></figure></p>
+<p>同理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 在zk3上测试与zk1,zk2的通信</span></div><div class="line">$ sudo mongo --host zk1 --port 27107</div><div class="line">$ sudo mongo --host zk2 --port 27017</div></pre></td></tr></table></figure></p>
+<p>结果如下则成功<br><img src="/assets/blogImg/mongodb-3.png" alt=""></p>
 
       
     </div>
