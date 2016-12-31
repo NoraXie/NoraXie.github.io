@@ -92,7 +92,7 @@
 <meta property="og:description" content="NoSQL概述随着互联网的高速发展,传统的面向关系型数据库渐渐无法满足高速实时 PB级 非结构化数据的存储.很快Not Only SQL数据库开始得到普遍的应用,如:面向文档的MongoDB,面向列的HBase/Cassandra,面向key-value的Redis,以及基于图像的Neo4j等.但是NoSQL旨在强调Key-Value和文档数据库的优点,并非单纯的反对关系型数据库.">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/mongodb-1.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/mongo-00.png">
-<meta property="og:updated_time" content="2016-12-31T07:46:28.000Z">
+<meta property="og:updated_time" content="2016-12-31T08:22:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB Cluster">
 <meta name="twitter:description" content="NoSQL概述随着互联网的高速发展,传统的面向关系型数据库渐渐无法满足高速实时 PB级 非结构化数据的存储.很快Not Only SQL数据库开始得到普遍的应用,如:面向文档的MongoDB,面向列的HBase/Cassandra,面向key-value的Redis,以及基于图像的Neo4j等.但是NoSQL旨在强调Key-Value和文档数据库的优点,并非单纯的反对关系型数据库.">
@@ -359,18 +359,32 @@
 <blockquote>
 <p>Document Database</p>
 </blockquote>
-<p>MongoDB中一条记录对应一个文档,可以理解 成key-value键值对的数据结构.文档与JSON对象非常相似,一个文档中可以包括其它文档,数组.这里将MongoDB与SQL中的概念进行罗列与类比.<br><img src="/assets/blogImg/mongo-00.png" alt=""></p>
+<p>MongoDB中一条记录对应一个文档,可以理解 成key-value键值对的数据结构.文档与JSON对象非常相似,一个文档中可以包括其它文档,数组.这里将MongoDB与SQL中的概念进行罗列与类比.</p>
+<p><img src="/assets/blogImg/mongo-00.png" alt=""></p>
+<table style="width=800px line-hight=40px"><tr><td>SQL术语/概念</td><td>MongoDB术语/概念</td><td>解释/说明</td></tr><tr><td>DATABASE</td><td>database</td><td>数据库</td></tr><tr><td>TABLE</td><td>collection</td><td>数据库表/集合</td></tr><tr><td>ROW</td><td>document</td><td>数据记录行/文档</td><br>  </tr><br>  <tr><br>    <td>COLUMN</td><br>    <td>field</td><br>    <td>数据字段/域</td><br>  </tr><br>  <tr><br>    <td>INDEX</td><br>    <td>index</td><br>    <td>索引</td><br>  </tr><br>  <tr><br>    <td>TABLE JOINS</td><br>    <td></td><br>    <td>表连接,MongoDB不支持</td><br>  </tr><br>  <tr><br>    <td>PRIMARY KEY</td><br>    <td>primary key</td><br>    <td>主键,MongoDB自动将_id字段设置为主键</td><br>  </tr><br></table>
+
+
 <blockquote>
-<table><br>  <tr><br>    <td>SQL术语/概念</td><br>    <td>MongoDB术语/概念</td><br>    <td>解释/说明</td><br>  </tr><br>  <tr><br>    <td>DATABASE</td><br>    <td>database</td><br>    <td>数据库</td><br>  </tr><br>  <tr><br>    <td>TABLE</td><br>    <td>collection</td><br>    <td>数据库表/集合</td><br>  </tr><br>  <tr><br>    <td>ROW</td><br>    <td>document</td><br>    <td>数据记录行/文档</td><br>  </tr><br>  <tr><br>    <td>COLUMN</td><br>    <td>field</td><br>    <td>数据字段/域</td><br>  </tr><br>  <tr><br>    <td>INDEX</td><br>    <td>index</td><br>    <td>索引</td><br>  </tr><br>  <tr><br>    <td>TABLE JOINS</td><br>    <td></td><br>    <td>表连接,MongoDB不支持</td><br>  </tr><br>  <tr><br>    <td>PRIMARY KEY</td><br>    <td>primary key</td><br>    <td>主键,MongoDB自动将_id字段设置为主键</td><br>  </tr><br></table>
-
-
-
-
-
 <p>主要优点</p>
 </blockquote>
-<p><em>High Performance 高性能</em></p>
-<p>MongoDB高性能体现在数据持久化上,快速查询索引上表现尤为出色.</p>
+<p><strong>High Performance 高性能</strong></p>
+<p>MongoDB高性能体现在数据持久化上,其对嵌入式数据模型的支持降低了数据库系统的I/O操作,而索引库使得查询其在数据查询上表现尤为出色.</p>
+<p><strong>Rich Query Language 丰富的查询语言</strong></p>
+<p>MongoDB不但支持简单的CRUD操作,还支持用户进行数据聚合,文本搜索以及基于地理位置的查询.</p>
+<p><strong>High Availability 高可用</strong></p>
+<p>MongoDB的数据高可用系统叫:replica set.它是一个由一组存有相同数据的镜像MongoDB服务组成,这一组服务器集群可以在主节点宕机时,自动完成选举迅速对外恢复访问接口;同时保证了单点访问的尴尬;集群中数据一致性通过主节点的log文件实现,所有从节点抓取日志,并将日志中的操作加载到内存中,从而保证数据一致性.</p>
+<p><strong>Horizontal Scalability 水平扩展</strong></p>
+<p>所谓水平扩展是相对垂直扩展而言的.通常,当系统性能不足时,如硬盘空间不足或内存吃紧时,很容易想到给服务器升级硬件,但但往往硬件的升级会带来相对较高的成本,而且是无止境的.试想,GOOGLE的每一台服务器都是相同配置的硬件,那么GOOGLE就太不会过日子了.</p>
+<p>除了升级硬件,往往会选择多加几台配置相对较低的服务器,这就是水平扩展.MongoDB的replica sets对水平扩展有很好的支持,只需要在一台服务器上装上MongoDB,让它与其它replica sets在可达的网段中,启动这台server的mongod服务即可.</p>
+<h3 id="Hello-MongoDB"><a href="#Hello-MongoDB" class="headerlink" title="Hello MongoDB"></a>Hello MongoDB</h3><p>说了那么多,这里就根据官网的介绍装一台MongoDB跑起来,俗话说是螺子是马拉出来溜溜.</p>
+<blockquote>
+<p>Note:</p>
+<ul>
+<li>不同的计算机环境,在搭建时步骤不尽相同,不可盲目根据他人的安装步骤操作,建议读者去官网找到与自己PC环境相同的安装说明.</li>
+<li>这是使用Linux Ret Hat CentOS6.5系统</li>
+<li>MongoDB分社区版和企业版,普通用户自己玩玩就下个企业版足以.</li>
+</ul>
+</blockquote>
 
       
     </div>
@@ -533,7 +547,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#NoSQL概述"><span class="nav-number">1.</span> <span class="nav-text">NoSQL概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB"><span class="nav-number">2.</span> <span class="nav-text">MongoDB</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#NoSQL概述"><span class="nav-number">1.</span> <span class="nav-text">NoSQL概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MongoDB"><span class="nav-number">2.</span> <span class="nav-text">MongoDB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hello-MongoDB"><span class="nav-number">3.</span> <span class="nav-text">Hello MongoDB</span></a></li></ol></div>
             
 
           </div>
