@@ -93,8 +93,9 @@
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/mongodb-1.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/mongo-00.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/mongodb-2.png">
+<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/mongodb-4.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/mongodb-3.png">
-<meta property="og:updated_time" content="2016-12-31T09:43:30.000Z">
+<meta property="og:updated_time" content="2016-12-31T14:34:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB Cluster">
 <meta name="twitter:description" content="NoSQL概述随着互联网的高速发展,传统的面向关系型数据库渐渐无法满足高速实时 PB级 非结构化数据的存储.很快Not Only SQL数据库开始得到普遍的应用,如:面向文档的MongoDB,面向列的HBase/Cassandra,面向key-value的Redis,以及基于图像的Neo4j等.但是NoSQL旨在强调Key-Value和文档数据库的优点,并非单纯的反对关系型数据库.">
@@ -490,6 +491,7 @@
 </tr>
 </tbody>
 </table>
+<p><img src="/assets/blogImg/mongodb-4.png" alt=""></p>
 <blockquote>
 <p>测试MongoDB之间的通信</p>
 </blockquote>
@@ -497,6 +499,16 @@
 <p>同理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 在zk2上测试与zk1,zk3的通信</span></div><div class="line">$ sudo mongo --host zk1 --port 27017</div><div class="line">$ sudo mongo --host zk3 --port 27017</div></pre></td></tr></table></figure></p>
 <p>同理<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 在zk3上测试与zk1,zk2的通信</span></div><div class="line">$ sudo mongo --host zk1 --port 27017</div><div class="line">$ sudo mongo --host zk2 --port 27017</div></pre></td></tr></table></figure></p>
 <p>结果如下则成功<br><img src="/assets/blogImg/mongodb-3.png" alt=""></p>
+<blockquote>
+<p>开始配置</p>
+</blockquote>
+<p><strong>4.1启动集群下的第一台MongoDB服务</strong><br>zk1上启动MongoDB的守护进程mongod.zk2与zk3做相同的操作,不同处为rs0-1,rs0-2.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># --replSet: replica set 集群名称</span></div><div class="line"><span class="comment"># --dbpath: mongodb服务器数据存储目录</span></div><div class="line">$ sudo mkdir /srv/mongodb/rs0-0</div><div class="line">$ sudo mongod --port 27017 --dbpath /srv/mongodb/rs0-0 --replSet rs0</div></pre></td></tr></table></figure></p>
+<p><strong>4.2通过mongo shell脚本连接replica set “rs0”</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mongo --host zk1 --port 27017</div></pre></td></tr></table></figure></p>
+<p><strong>4.3初始化replica set</strong></p>
+<blockquote>
+<p>NOTE: 只对三个MongoDB实例中的一个进行初始化!!!这里对zk2初始化</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">&gt; rs.initiate()</div><div class="line">&gt; &#123;</div><div class="line">	&quot;info2&quot; : &quot;no configuration specified. Using a default configuration for the set&quot;,</div><div class="line">	&quot;me&quot; : &quot;zk2:27017&quot;,</div><div class="line">	&quot;ok&quot; : 1</div><div class="line">&#125;</div><div class="line">&gt; rs.conf()</div><div class="line">&gt; &#123;</div><div class="line">	&quot;_id&quot; : &quot;rs0&quot;,</div><div class="line">	&quot;version&quot; : 1,</div><div class="line">	&quot;protocolVersion&quot; : NumberLong(1),</div><div class="line">	&quot;members&quot; : [</div><div class="line">		&#123;</div><div class="line">			&quot;_id&quot; : 0,</div><div class="line">			&quot;host&quot; : &quot;zk2:27017&quot;,</div><div class="line">			&quot;arbiterOnly&quot; : false,</div><div class="line">			&quot;buildIndexes&quot; : true,</div><div class="line">			&quot;hidden&quot; : false,</div><div class="line">			&quot;priority&quot; : 1,</div><div class="line">			&quot;tags&quot; : &#123;</div><div class="line"></div><div class="line">			&#125;,</div><div class="line">			&quot;slaveDelay&quot; : NumberLong(0),</div><div class="line">			&quot;votes&quot; : 1</div><div class="line">		&#125;</div><div class="line">	],</div><div class="line">	&quot;settings&quot; : &#123;</div><div class="line">		&quot;chainingAllowed&quot; : true,</div><div class="line">		&quot;heartbeatIntervalMillis&quot; : 2000,</div><div class="line">		&quot;heartbeatTimeoutSecs&quot; : 10,</div><div class="line">		&quot;electionTimeoutMillis&quot; : 10000,</div><div class="line">		&quot;catchUpTimeoutMillis&quot; : 2000,</div><div class="line">		&quot;getLastErrorModes&quot; : &#123;</div><div class="line"></div><div class="line">		&#125;,</div><div class="line">		&quot;getLastErrorDefaults&quot; : &#123;</div><div class="line">			&quot;w&quot; : 1,</div><div class="line">			&quot;wtimeout&quot; : 0</div><div class="line">		&#125;,</div><div class="line">		&quot;replicaSetId&quot; : ObjectId(&quot;58679a46b38415c5ce99b572&quot;)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
