@@ -92,7 +92,7 @@
 <meta property="og:description" content="NoSQL概述随着互联网的高速发展,传统的面向关系型数据库渐渐无法满足高速实时 PB级 非结构化数据的存储.很快Not Only SQL数据库开始得到普遍的应用,如:面向文档的MongoDB,面向列的HBase/Cassandra,面向key-value的Redis,以及基于图像的Neo4j等.但是NoSQL旨在强调Key-Value和文档数据库的优点,并非单纯的反对关系型数据库.">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/mongodb-1.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/mongo-00.png">
-<meta property="og:updated_time" content="2016-12-31T07:43:46.000Z">
+<meta property="og:updated_time" content="2016-12-31T07:46:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB Cluster">
 <meta name="twitter:description" content="NoSQL概述随着互联网的高速发展,传统的面向关系型数据库渐渐无法满足高速实时 PB级 非结构化数据的存储.很快Not Only SQL数据库开始得到普遍的应用,如:面向文档的MongoDB,面向列的HBase/Cassandra,面向key-value的Redis,以及基于图像的Neo4j等.但是NoSQL旨在强调Key-Value和文档数据库的优点,并非单纯的反对关系型数据库.">
@@ -359,9 +359,14 @@
 <blockquote>
 <p>Document Database</p>
 </blockquote>
-<p>MongoDB中一条记录对应一个文档,可以理解 成key-value键值对的数据结构.文档与JSON对象非常相似,一个文档中可以包括其它文档,数组.这里将MongoDB与SQL中的概念进行罗列与类比.</p>
-<p><img src="/assets/blogImg/mongo-00.png" alt=""><table><br>  <tr><br>    <td>SQL术语/概念</td><br>    <td>MongoDB术语/概念</td><br>    <td>解释/说明</td><br>  </tr><br>  <tr><br>    <td>DATABASE</td><br>    <td>database</td><br>    <td>数据库</td><br>  </tr><br>  <tr><br>    <td>TABLE</td><br>    <td>collection</td><br>    <td>数据库表/集合</td><br>  </tr><br>  <tr><br>    <td>ROW</td><br>    <td>document</td><br>    <td>数据记录行/文档</td><br>  </tr><br>  <tr><br>    <td>COLUMN</td><br>    <td>field</td><br>    <td>数据字段/域</td><br>  </tr><br>  <tr><br>    <td>INDEX</td><br>    <td>index</td><br>    <td>索引</td><br>  </tr><br>  <tr><br>    <td>TABLE JOINS</td><br>    <td></td><br>    <td>表连接,MongoDB不支持</td><br>  </tr><br>  <tr><br>    <td>PRIMARY KEY</td><br>    <td>primary key</td><br>    <td>主键,MongoDB自动将_id字段设置为主键</td><br>  </tr><br></table></p>
+<p>MongoDB中一条记录对应一个文档,可以理解 成key-value键值对的数据结构.文档与JSON对象非常相似,一个文档中可以包括其它文档,数组.这里将MongoDB与SQL中的概念进行罗列与类比.<br><img src="/assets/blogImg/mongo-00.png" alt=""></p>
 <blockquote>
+<table><br>  <tr><br>    <td>SQL术语/概念</td><br>    <td>MongoDB术语/概念</td><br>    <td>解释/说明</td><br>  </tr><br>  <tr><br>    <td>DATABASE</td><br>    <td>database</td><br>    <td>数据库</td><br>  </tr><br>  <tr><br>    <td>TABLE</td><br>    <td>collection</td><br>    <td>数据库表/集合</td><br>  </tr><br>  <tr><br>    <td>ROW</td><br>    <td>document</td><br>    <td>数据记录行/文档</td><br>  </tr><br>  <tr><br>    <td>COLUMN</td><br>    <td>field</td><br>    <td>数据字段/域</td><br>  </tr><br>  <tr><br>    <td>INDEX</td><br>    <td>index</td><br>    <td>索引</td><br>  </tr><br>  <tr><br>    <td>TABLE JOINS</td><br>    <td></td><br>    <td>表连接,MongoDB不支持</td><br>  </tr><br>  <tr><br>    <td>PRIMARY KEY</td><br>    <td>primary key</td><br>    <td>主键,MongoDB自动将_id字段设置为主键</td><br>  </tr><br></table>
+
+
+
+
+
 <p>主要优点</p>
 </blockquote>
 <p><em>High Performance 高性能</em></p>
