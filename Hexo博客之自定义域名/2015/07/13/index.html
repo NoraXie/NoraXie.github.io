@@ -102,7 +102,8 @@ Coding+Hexo
 Nginx+Hexo">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/hexo-1.gif">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/hexoblog-1.png">
-<meta property="og:updated_time" content="2016-12-12T00:48:18.000Z">
+<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/dns.png">
+<meta property="og:updated_time" content="2017-01-02T08:03:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo博客之自定义域名">
 <meta name="twitter:description" content="最初的愿望最近在鼓捣个人博客,用的流行框架Hexo.搭建博客的方式非常多,之所以选择Hexo是因为它的快捷和简约.鉴于自己在博客搭建过程中走了不少弯路,这里就Hexo博客的几种搭建原理进行梳理.今天介绍一下GitHub和Coding方式.
@@ -411,10 +412,81 @@ Nginx+Hexo">
 <p>如何获取域名</p>
 </blockquote>
 <p>度娘各种域名购买网站,我用的是国外的GoDaddy,第一年7RMB</p>
-<blockquote>
-<p>如何绑定域名和博客</p>
-</blockquote>
-<p>请看明天的域名解析</p>
+<p><strong>名词解释</strong><br>1.记录</p>
+<table>
+<thead>
+<tr>
+<th>记录</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>地址记录，用来指定域名的IPv4地址（如：8.8.8.8），如果需要将域名指向一个IP地址，就需要添加A记录</td>
+</tr>
+<tr>
+<td>CNAME</td>
+<td>如果需要将域名指向另一个域名，再由另一个域名提供ip地址，就需要添加CNAME记录  </td>
+</tr>
+<tr>
+<td>TXT</td>
+<td>在这里可以填写任何东西，长度限制255。绝大多数的TXT记录是用来做SPF记录（反垃圾邮件）  </td>
+</tr>
+<tr>
+<td>NS</td>
+<td>域名服务器记录，如果需要把子域名交给其他DNS服务商解析，就需要添加NS记录  </td>
+</tr>
+<tr>
+<td>AAAA</td>
+<td>用来指定主机名（或域名）对应的IPv6地址（例如：ff06:0:0:0:0:0:0:c3）记录</td>
+</tr>
+<tr>
+<td>MX</td>
+<td>如果需要设置邮箱，让邮箱能收到邮件，就需要添加MX记录。</td>
+</tr>
+<tr>
+<td>显性URL</td>
+<td>从一个地址301重定向到另一个地址的时候，就需要添加显性URL记录（注：DNSPod目前只支持301重定向）</td>
+</tr>
+<tr>
+<td>SRV</td>
+<td>记录了哪台计算机提供了哪个服务。格式为：服务的名字、点、协议的类型，例如:<code>_xmpp-server.tcp</code></td>
+</tr>
+<tr>
+<td>隐性URL</td>
+<td>记录了哪台计算机提供了哪个服务。格式为：服务的名字、点、协议的类型，例如:<code>_xmpp-server._tcp</code></td>
+</tr>
+</tbody>
+</table>
+<p>Coding和Github都支持CNAME记录,且向用户提供一个与用户名匹配的域名.由个人域名指向另一个域名,显然要使用CNAME记录.关系图如下:<br><img src="/assets/blogImg/dns.png" alt=""></p>
+<p>2.主机记录<br>主机记录就是域名的前缀,如果你希望访问他人在访问你您的域名时,不输入www,那么将主机记录设置为@,值为你的域名,这里我的域名是<a href="xpercent.tech">xpercent.tech</a>.</p>
+<table>
+<thead>
+<tr>
+<th>主机记录用法</th>
+<th>解析前</th>
+<th>解析后  </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@</td>
+<td><code>*</code>xpercent.tech</td>
+<td>xpercent.tech  </td>
+</tr>
+<tr>
+<td>www</td>
+<td><code>*</code>.xpercent.tech</td>
+<td>www.xpercent.tech  </td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td><code>*</code>.xpercent.tech</td>
+<td>泛解析,匹配所有<code>*</code>.xpercent.tech域名  </td>
+</tr>
+</tbody>
+</table>
 <h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>想建博客有好几年,碍于不懂前端,审美又拙略,几度放弃了.由于不懂域名,域名解析,不懂nodejs,不懂npm,走了不少弯路,百度上个问题解决高手彼此默契度极高的提供同一种解决方案,最终离成功越来越远.没办法,硬着头皮把官网的英文文档仔细读了N遍,终于有了雏形.所以,<strong>要懂得有问题找官网(不是度娘),有耐心,不怕寂寞.</strong></p>
 
       
