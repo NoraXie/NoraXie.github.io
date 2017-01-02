@@ -330,6 +330,13 @@ Quick">
 
           
             
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/Hello-Hexo/2015/06/20/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="Hello-Hexo/2015/06/20/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -414,6 +421,12 @@ Quick">
 
     <div class="post-spread">
       
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
     </div>
   </div>
 
@@ -424,6 +437,13 @@ Quick">
 
           
   <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
     
   </div>
 
@@ -540,7 +560,7 @@ Quick">
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2016</span>
+  <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -641,10 +661,35 @@ Quick">
 
   
 
+    <script type="text/javascript">
+      var disqus_shortname = 'xpercent';
+      var disqus_identifier = 'Hello-Hexo/2015/06/20/';
+
+      var disqus_title = "Hello Hexo";
 
 
+      function run_disqus_script(disqus_script) {
+        var dsq = document.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/' + disqus_script;
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
 
-	
+      run_disqus_script('count.js');
+
+      
+        var disqus_config = function () {
+            this.page.url = disqus_url;
+            this.page.identifier = disqus_identifier;
+            this.page.title = disqus_title;
+        };
+        run_disqus_script('embed.js');
+      
+
+    </script>
+  
+
 
 
 
