@@ -84,21 +84,70 @@
 
 
 
-<meta name="description" content="集群主机架构公司共有5台服务器,根据主机硬件,设置成下表所示的集群分布.  | ZK  |NameNode  |JournalNode  |ZKFC |RsManager  |HMaster  |HRegionServer|–|—|—|—|—|—|—|—-|–zk1  |yes  |yes  |yes  |yes  |   |   |yeszk2  |yes  |yes  |yes |yes  |">
+<meta name="description" content="集群主机架构公司共有5台服务器,根据主机硬件,设置成下表所示的集群分布.
+集群内主机环境准备如图所示
+集群内服务的安装与配置
+Hadoop
+HDFS
+Yarn
+JournalNode
+ZKFC
+
+
+Zookeeper
+Hbase
+
+
+集群搭建启动集群的启动有两种情况:首次启动和非首次启动.
+搭建完成后将主机进程与上面的表格对比下.
+参考资料1 HDFS High Availability Usin">
 <meta property="og:type" content="article">
 <meta property="og:title" content="生产环境Hadoop+Hbase集群搭建">
 <meta property="og:url" content="http://xpercent.coding.me/生产环境Hadoop-Hbase集群搭建/2017/01/04/index.html">
 <meta property="og:site_name" content="Xpercent">
-<meta property="og:description" content="集群主机架构公司共有5台服务器,根据主机硬件,设置成下表所示的集群分布.  | ZK  |NameNode  |JournalNode  |ZKFC |RsManager  |HMaster  |HRegionServer|–|—|—|—|—|—|—|—-|–zk1  |yes  |yes  |yes  |yes  |   |   |yeszk2  |yes  |yes  |yes |yes  |">
+<meta property="og:description" content="集群主机架构公司共有5台服务器,根据主机硬件,设置成下表所示的集群分布.
+集群内主机环境准备如图所示
+集群内服务的安装与配置
+Hadoop
+HDFS
+Yarn
+JournalNode
+ZKFC
+
+
+Zookeeper
+Hbase
+
+
+集群搭建启动集群的启动有两种情况:首次启动和非首次启动.
+搭建完成后将主机进程与上面的表格对比下.
+参考资料1 HDFS High Availability Usin">
+<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/hdp-0.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/hdp_00.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/hdp_01.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/hdp_02.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/hdp_04.jpeg">
-<meta property="og:updated_time" content="2017-01-04T11:31:59.000Z">
+<meta property="og:updated_time" content="2017-01-04T11:53:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="生产环境Hadoop+Hbase集群搭建">
-<meta name="twitter:description" content="集群主机架构公司共有5台服务器,根据主机硬件,设置成下表所示的集群分布.  | ZK  |NameNode  |JournalNode  |ZKFC |RsManager  |HMaster  |HRegionServer|–|—|—|—|—|—|—|—-|–zk1  |yes  |yes  |yes  |yes  |   |   |yeszk2  |yes  |yes  |yes |yes  |">
-<meta name="twitter:image" content="http://xpercent.coding.me/assets/blogImg/hdp_00.png">
+<meta name="twitter:description" content="集群主机架构公司共有5台服务器,根据主机硬件,设置成下表所示的集群分布.
+集群内主机环境准备如图所示
+集群内服务的安装与配置
+Hadoop
+HDFS
+Yarn
+JournalNode
+ZKFC
+
+
+Zookeeper
+Hbase
+
+
+集群搭建启动集群的启动有两种情况:首次启动和非首次启动.
+搭建完成后将主机进程与上面的表格对比下.
+参考资料1 HDFS High Availability Usin">
+<meta name="twitter:image" content="http://xpercent.coding.me/assets/blogImg/hdp-0.png">
 
 
 
@@ -361,12 +410,18 @@
       
 
       
-        <h3 id="集群主机架构"><a href="#集群主机架构" class="headerlink" title="集群主机架构"></a>集群主机架构</h3><p>公司共有5台服务器,根据主机硬件,设置成下表所示的集群分布.<br>  | ZK  |NameNode  |JournalNode  |ZKFC |RsManager  |HMaster  |HRegionServer|<br>–|—|—|—|—|—|—|—-|–<br>zk1  |yes  |yes  |yes  |yes  |   |   |yes<br>zk2  |yes  |yes  |yes |yes  |yes  |   |yes<br>zk3  |yes  |   |yes  |    |   |yes  |<br>hbase1  |   |   |   |   |   |   |yes<br>hbase0  |   |   |   |   |   |yes  |  </p>
+        <h3 id="集群主机架构"><a href="#集群主机架构" class="headerlink" title="集群主机架构"></a>集群主机架构</h3><p>公司共有5台服务器,根据主机硬件,设置成下表所示的集群分布.<br><img src="/assets/blogImg/hdp-0.png" alt=""></p>
 <h3 id="集群内主机环境准备"><a href="#集群内主机环境准备" class="headerlink" title="集群内主机环境准备"></a>集群内主机环境准备</h3><p>如图所示<br><img src="/assets/blogImg/hdp_00.png" alt=""></p>
 <h3 id="集群内服务的安装与配置"><a href="#集群内服务的安装与配置" class="headerlink" title="集群内服务的安装与配置"></a>集群内服务的安装与配置</h3><ul>
-<li>1.Hadoop</li>
-<li>2.Zookeeper</li>
-<li>3.Hbase</li>
+<li>Hadoop<ul>
+<li>HDFS</li>
+<li>Yarn</li>
+<li>JournalNode</li>
+<li>ZKFC</li>
+</ul>
+</li>
+<li>Zookeeper</li>
+<li>Hbase</li>
 </ul>
 <p><img src="/assets/blogImg/hdp_01.png" alt=""></p>
 <h3 id="集群搭建启动"><a href="#集群搭建启动" class="headerlink" title="集群搭建启动"></a>集群搭建启动</h3><p>集群的启动有两种情况:首次启动和非首次启动.<br><img src="/assets/blogImg/hdp_02.png" alt=""></p>
