@@ -103,7 +103,7 @@ Nginx+Hexo">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/hexo-1.gif">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/hexoblog-1.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/dns.png">
-<meta property="og:updated_time" content="2017-01-02T08:03:55.000Z">
+<meta property="og:updated_time" content="2017-01-09T11:12:49.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo博客之自定义域名">
 <meta name="twitter:description" content="最初的愿望最近在鼓捣个人博客,用的流行框架Hexo.搭建博客的方式非常多,之所以选择Hexo是因为它的快捷和简约.鉴于自己在博客搭建过程中走了不少弯路,这里就Hexo博客的几种搭建原理进行梳理.今天介绍一下GitHub和Coding方式.
@@ -386,16 +386,19 @@ Nginx+Hexo">
 <a id="more"></a>  
 <h2 id="过程预览"><a href="#过程预览" class="headerlink" title="过程预览"></a>过程预览</h2><p><img src="/assets/blogImg/hexoblog-1.png" alt=""></p>
 <h2 id="原理介绍"><a href="#原理介绍" class="headerlink" title="原理介绍"></a>原理介绍</h2><blockquote>
-<p>写博客  </p>
+<font color="00CED1"><strong>写博客</strong></font>  
+
 </blockquote>
 <p>显然写博客依赖Hexo,她帮助我们管理博客资源,包括写好的文章,文章中插入的图片,音乐,视频,博客的主题样式,动态效果源文件等等.因此,我们需要从官网下载Hexo.</p>
 <blockquote>
-<p>博客写好,如何访问</p>
+<font color="00CED1"><strong>博客写好,如何访问</strong></font>
+
 </blockquote>
-<p>Hexo包括很多静态资源(网页,网页中的图片,视频,音乐,脚本文件等等),他们需要放在某台始终运行的服务器上,网络用户通过在浏览器地址栏输入公网地址(这个地址是什么,我们后面详细介绍)来进行访问.比如我们常常输入<em>www.baidu.com</em>即可看到度娘,现在希望输入<a href="xpercent.coding.me">xpercent.coding.me</a>(^~^百分号我的博客地址)能看到我写的文章.</p>
+<p>Hexo包括很多静态资源(网页,网页中的图片,视频,音乐,脚本文件等等),他们需要放在某台始终运行的服务器上,网络用户通过在浏览器地址栏输入公网地址(这个地址是什么,我们后面详细介绍)来进行访问.比如我们常常输入<em>www.baidu.com</em>即可看到度娘,现在希望输入<a href="xpercent.coding.me"><font color="00CED1"><em>**</em></font>xpercent.coding.me</a>(^~^百分号我的博客地址)能看到我写的文章.</p>
 <p>所以需要将Hexo博客内容放在一个大家都看的到摸得着的地儿.这个地儿可以是Github,Coding,虚拟主机甚至任意一台24小时运行的服务器(也是电脑).这几种方式能给我们的博客提供一个供全球老百姓找到你的网址,当然有墙的朋友们还得跨过山和大海.</p>
 <blockquote>
-<p>如何获得Hexo</p>
+<font color="00CED1"><strong>如何获得Hexo</strong></font>
+
 </blockquote>
 <p>点这里<a href="">Hexo</a>看看官方文档,我们发现,Hexo是一位台湾Boy用Node.js写的一个前端框架,它的运行依赖于Git(代码管理工具)和Node.js.所以获取Hexo的逻辑是:  </p>
 <ul>
@@ -405,11 +408,13 @@ Nginx+Hexo">
 </ul>
 <h2 id="域名基础知识"><a href="#域名基础知识" class="headerlink" title="域名基础知识"></a>域名基础知识</h2><p>无论是Github还是Coding,都是通过项目托管平台帮助我们管理资源,每次发布博客都要先将同步到这些平台上,才能发布到网络上.网络用户在访问时都用类似username.github.io或者username.coding.me的网址访问博客,不利于SEO和个人品牌的打造.于是有必要给自己的博客申请一个独立的域名.</p>
 <blockquote>
-<p>什么是域名</p>
+<font color="00CED1"><strong>什么是域名</strong></font>
+
 </blockquote>
 <p>举些栗子:<br>百度的域名:www.baidu.com<br>新浪的域名:www.sina.com.cn<br>我的博客域名:xpercent.tech<br>通俗的理解,域名是浏览器访问网络资源的地址.</p>
 <blockquote>
-<p>如何获取域名</p>
+<font color="00CED1"><strong>如何获取域名</strong></font>
+
 </blockquote>
 <p>度娘各种域名购买网站,我用的是国外的GoDaddy,第一年7RMB</p>
 <p><strong>名词解释</strong><br>1.记录</p>

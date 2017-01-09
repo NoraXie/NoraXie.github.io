@@ -95,7 +95,7 @@
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/net-5.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/net-2.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/net-4.png">
-<meta property="og:updated_time" content="2016-12-13T18:44:48.000Z">
+<meta property="og:updated_time" content="2017-01-09T11:19:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux网络基础">
 <meta name="twitter:description" content="引言随着移动互联网的疯长式发展,互联网公司开始因为自身产品的用户指数级增长的同时,内心是复杂的.用户量的增加往往会给自己的产品提升知名度和经济效益.另一方面,超大用户访问量也给系统的维护和开始带来了挑战.目前国内面临着巨大高并发的企业典型的有两家,12306和阿里的各种购物狂欢节.2011年的时候12306还在春运时遭到广大刷票党的吐槽,到15年的今天,12306一点一点的在进步着.而淘宝每年的双">
@@ -367,7 +367,11 @@
 <p><img src="/assets/blogImg/net-0.jpg" alt=""></p>
 <a id="more"></a>
 <blockquote>
-<p>知识准备</p>
+<font color="00CED1"><strong>知识准备</strong></font>
+
+
+
+
 </blockquote>
 <ol>
 <li>计算机两种分层结构OSI和ISO</li>
@@ -380,7 +384,8 @@
 <li>网卡</li>
 </ol>
 <h2 id="互联网中计算机间的通信"><a href="#互联网中计算机间的通信" class="headerlink" title="互联网中计算机间的通信"></a>互联网中计算机间的通信</h2><blockquote>
-<p>名词解释</p>
+<font color="00CED1"><strong>名词解释</strong></font>
+
 </blockquote>
 <p>host1 — 主机1(可以理解成互联网中做任意一台电脑)<br>host2 — 主机2<br>host3 — 主机3   </p>
 <p>switcher1 — 交换机(物理设备,二层,只看目标与源的mac地址与端口)  </p>
@@ -388,11 +393,13 @@
 <p>网卡 — 物理设备,维护着一个IP地址,该地址与一个mac地址是绑定关系.</p>
 <p>任意两台主机想要通信,需要先互发数据包,进行三次握手,成功建立连接后,再由请求主机向目标主机发送数据包.这是一个互联网请求的大前提.</p>
 <blockquote>
-<p>假如有一台主机host1, 它本地维护着一张路由表,数据结构如下</p>
+<font color="00CED1"><strong>假如有一台主机host1, 它本地维护着一张路由表,数据结构如下</strong></font>
+
 </blockquote>
 <p><img src="/assets/blogImg/net-1.png" alt=""></p>
 <blockquote>
-<p>host1与host2通信</p>
+<font color="00CED1"><strong>host1与host2通信</strong></font>
+
 </blockquote>
 <p>Step1: 确认要发送的数据包三大内容,mac地址,IP地址,端口.</p>
 <p>Step2: 发送数据包建立进行三次握手,这是关于最小网络连接的导图.一个简单的http请求,必须完成的最小粒度应该是三次握手—数据—四次分手.只有双方主机都确认分手以后,客户端才会释放本次连接使用的端口号,以节省资源.</p>
@@ -400,21 +407,24 @@
 <p>Step3: 发送真实数据,下图显示了其发送数据的过程.图中host1与host2处于同一个网段中,中间只连了一台交换机,于是直接将数据包扔给交换机,交换机通过物理网卡收发数据,这个速度无疑是非常快的.具体过程下图有详细说明.</p>
 <p><img src="/assets/blogImg/net-2.png" alt=""></p>
 <blockquote>
-<p>host1与Host3通信</p>
+<font color="00CED1"><strong>host1与Host3通信</strong></font>
+
 </blockquote>
 <p>step1与step2同上.</p>
 <p>step3:host1与host3不在同一个网段,因此在确认数据包时,需要取网关的mac地址;此后host1将请求数据扔给肉头,也就是router1.这后router1要做的事情是重复操作step1,step2,step3,直到找到目标主机.如果目标主机根本不存在,那么连接会超时.过程分析图如下.</p>
 <p><img src="/assets/blogImg/net-4.png" alt=""></p>
 <h2 id="服务器的瓶颈"><a href="#服务器的瓶颈" class="headerlink" title="服务器的瓶颈"></a>服务器的瓶颈</h2><p>设计一个极简单的web网站, 很容易搭建一台服务器,上面放着用户可能需要的所有资源文件,图片,视频和日记等等.这个模型实现了非常简单的网络结构,效果显著.但也存在问题,当你在为网站做了大量推广时后,用户量猛增,同一时间的访问量跟着涨起来,保持一天增1000个(假设这个网站做的不错,用户不会流失),那么三个月后,这台服务器变得力不从心.用户关于访问页面总是404的一系列负面反馈也日益频繁.这就是高并发形成的服务器瓶颈.</p>
 <blockquote>
-<p>这个现象揭示了两个问题</p>
+<font color="00CED1"><strong>这个现象揭示了两个问题</strong></font>
+
 </blockquote>
 <ol>
 <li>用户访问量大的时候,服务器甚至都无法保证与每个请求建立连接.</li>
 <li>同样是高并发,一台服务器毕竟只能提供有限的IO,终究导致往外写数据十分缓慢.</li>
 </ol>
 <blockquote>
-<p>解决办法1</p>
+<font color="00CED1"><strong>解决办法1</strong></font>
+
 </blockquote>
 <p>既然一台服务器已经无法满足海量用户的访问,那么就多买几台服务器好了.话说顾客是上帝,互联网时代,用户群就是王道,一切为用户.</p>
 <p>不幸的是问题依然存在.比如:</p>
@@ -423,13 +433,15 @@
 <li>即使现在的域名解析支持一个域名绑定多个IP地址.那这个IP地址就必须是公网IP,而公网IP资源有限,一台服务器一个公网IP,显然不是良策.</li>
 </ol>
 <blockquote>
-<p>解决办法2</p>
+<font color="00CED1"><strong>解决办法2</strong></font>
+
 </blockquote>
 <p>既然不能用公网IP,那么就在这些服务器与客户端之间再搭一台中间服务器,这台服务器负责持有公网IP,然后将用户请求的数据转发给其后的真实负服务器,即可.</p>
 <p>这种解决方案,会遇到一个网络技术问题.</p>
 <p>用户在发送请求时,首先会给中间服务器发送数据包,进行三次握手,这个过程建立连接的是用户与中间服务器.这就会导致负载服务器给用户发送响应数据时,被用户认为是不合法的连接,将被用户丢弃.</p>
 <blockquote>
-<p>解决办法3</p>
+<font color="00CED1"><strong>解决办法3</strong></font>
+
 </blockquote>
 <p>其实这个问题在实际生活中,早在1998年国内就有人提出了解决方案,那就是章文嵩士提出的LVS虚拟服务器.</p>
 <p>它是这么解决的.</p>

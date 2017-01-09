@@ -93,7 +93,7 @@
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/tengine-0.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/tengine-1.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/tengine-4.png">
-<meta property="og:updated_time" content="2017-01-09T08:36:49.000Z">
+<meta property="og:updated_time" content="2017-01-09T11:24:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tengine安装记录">
 <meta name="twitter:description" content="准备工作Linux系统搭建完毕,现在将之配置成一台反向代理服务器,这里选择对Nginx做了进一步封装的Tengine经过一番折腾,Tengine安装后运行起来就是这样啦.">
@@ -366,7 +366,8 @@
 <h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><p><img src="/assets/blogImg/tengine-1.png" alt=""></p>
 <h2 id="安装原理"><a href="#安装原理" class="headerlink" title="安装原理"></a>安装原理</h2><p>在官网上下载到的tengine-2.2.0.tar.gz是一个源码压缩包,在Linux上安装源码需要行进行编译,nginx是C语言编写的代码.</p>
 <blockquote>
-<p>编译器</p>
+<font color="00CED1"><strong>编译器</strong></font>
+
 </blockquote>
 <p>因此安装GCC编译器是必须也是必要的,可以一次安装GCC和GCC-C++,C++编译器是可选的,也可以在有需要时再去下载安装.<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yum install gcc gcc-c++</div></pre></td></tr></table></figure></p>
 <blockquote>
