@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="SSH,RS,Coding.net," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -84,24 +84,40 @@
 
 
 
-<meta name="description" content="SSH公钥Secure Shell(Abrevation SSH),由IETF的网络工作小组(Network Working Group)所制定;SSH是一项建立在应用层和传输层基础上的安全协议,为计算机上的Shell提供安全的传输和使用环境.">
+<meta name="description" content="Jenkins项目构建发布指南内容摘要
+部署服务器环境
+登录jenkins
+new item 创建项目
+build now 构建项目
+
+部署服务器环境  开发环境选择d1-my-dev-001这台服务器, 注意 在这台主机上新建的目录,如果需要远程主机访问,都应该是wosai属主和属组,否则在构建过程中执行脚本会遇到Permission Denied  
+
+通过跳板机登录到d1-my-dev-00">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hexo博客托管之SSH公钥">
-<meta property="og:url" content="http://xpercent.coding.me/Hexo博客托管之SSH公钥/2016/07/11/index.html">
+<meta property="og:title" content="jenkins使用指南">
+<meta property="og:url" content="http://xpercent.coding.me/jenkins使用指南/2017/02/27/index.html">
 <meta property="og:site_name" content="Xpercent">
-<meta property="og:description" content="SSH公钥Secure Shell(Abrevation SSH),由IETF的网络工作小组(Network Working Group)所制定;SSH是一项建立在应用层和传输层基础上的安全协议,为计算机上的Shell提供安全的传输和使用环境.">
-<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/ssh-0.jpg">
-<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/ssh-1.png">
-<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/ssh-2.png">
-<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/ssh-3.png">
-<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/ssh-4.png">
-<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/ssh-5.png">
-<meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/ssh-6.png">
-<meta property="og:updated_time" content="2017-01-09T11:14:52.000Z">
+<meta property="og:description" content="Jenkins项目构建发布指南内容摘要
+部署服务器环境
+登录jenkins
+new item 创建项目
+build now 构建项目
+
+部署服务器环境  开发环境选择d1-my-dev-001这台服务器, 注意 在这台主机上新建的目录,如果需要远程主机访问,都应该是wosai属主和属组,否则在构建过程中执行脚本会遇到Permission Denied  
+
+通过跳板机登录到d1-my-dev-00">
+<meta property="og:updated_time" content="2017-02-27T05:39:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo博客托管之SSH公钥">
-<meta name="twitter:description" content="SSH公钥Secure Shell(Abrevation SSH),由IETF的网络工作小组(Network Working Group)所制定;SSH是一项建立在应用层和传输层基础上的安全协议,为计算机上的Shell提供安全的传输和使用环境.">
-<meta name="twitter:image" content="http://xpercent.coding.me/assets/blogImg/ssh-0.jpg">
+<meta name="twitter:title" content="jenkins使用指南">
+<meta name="twitter:description" content="Jenkins项目构建发布指南内容摘要
+部署服务器环境
+登录jenkins
+new item 创建项目
+build now 构建项目
+
+部署服务器环境  开发环境选择d1-my-dev-001这台服务器, 注意 在这台主机上新建的目录,如果需要远程主机访问,都应该是wosai属主和属组,否则在构建过程中执行脚本会遇到Permission Denied  
+
+通过跳板机登录到d1-my-dev-00">
 
 
 
@@ -129,13 +145,13 @@
 
 
 
-  <link rel="canonical" href="http://xpercent.coding.me/Hexo博客托管之SSH公钥/2016/07/11/"/>
+  <link rel="canonical" href="http://xpercent.coding.me/jenkins使用指南/2017/02/27/"/>
 
 
 
 
 
-  <title> Hexo博客托管之SSH公钥 | Xpercent </title>
+  <title> jenkins使用指南 | Xpercent </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -266,7 +282,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://xpercent.coding.me/Hexo博客托管之SSH公钥/2016/07/11/">
+  <link itemprop="mainEntityOfPage" href="http://xpercent.coding.me/jenkins使用指南/2017/02/27/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Xpercent">
@@ -290,7 +306,7 @@
             
             
               
-                Hexo博客托管之SSH公钥
+                jenkins使用指南
               
             
           </h1>
@@ -303,8 +319,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-07-11T22:50:20+08:00">
-                2016-07-11
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-27T13:38:46+08:00">
+                2017-02-27
               </time>
             
 
@@ -314,31 +330,13 @@
           </span>
 
           
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Hexo/" itemprop="url" rel="index">
-                    <span itemprop="name">Hexo</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
 
           
             
               <span class="post-comments-count">
                 <span class="post-meta-divider">|</span>
-                <a href="/Hexo博客托管之SSH公钥/2016/07/11/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="Hexo博客托管之SSH公钥/2016/07/11/" itemprop="commentCount"></span>
+                <a href="/jenkins使用指南/2017/02/27/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="jenkins使用指南/2017/02/27/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -364,31 +362,33 @@
       
 
       
-        <h2 id="SSH公钥"><a href="#SSH公钥" class="headerlink" title="SSH公钥"></a>SSH公钥</h2><p>Secure Shell(Abrevation SSH),由IETF的网络工作小组(Network Working Group)所制定;SSH是一项建立在应用层和传输层基础上的安全协议,为计算机上的Shell提供安全的传输和使用环境.</p>
-<p><img src="/assets/blogImg/ssh-0.jpg" alt=""></p>
-<a id="more"></a>
-<p>传统的网络服务程序,如rsh、FTP、POP和Telnet其本质上都是不安全的;因为它们在网络上用明文传送数据、用户帐号和用户口令,很容易受到中间人（man-in-the-middle）攻击方式的攻击.就是存在另一个人或者一台机器冒充真正的服务器接收用户传给服务器的数据,然后再冒充用户把数据传给真正的服务器.</p>
-<p>而SSH是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议.利用SSH协议可以有效防止远程管理过程中的信息泄露问题.透过SSH可以对所有传输的数据进行加密,也能够防止DNS欺骗和IP欺骗.</p>
-<p>SSH之另一项优点为其传输的数据可以是经过压缩的,所以可以加快传输的速度.SSH有很多功能,它既可以代替Telnet,又可以为FTP、POP、甚至为PPP提供一个安全的「通道」。</p>
-<h2 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h2><p><a href="https://coding.net/" target="_blank" rel="external">Coding</a>目前国内十分流行的一站式云端软件服务平台,类似于国外著名的<a href="https://github.com/github" target="_blank" rel="external">Github</a>.于今年3月收购了GitCafe,其创始人Tomas在GitCafe创立之初,就坦言不只是克隆Github的代码托管功能,而是希望将GitCafe打造成一个有文化意义的社群,Developers可以在这个社区内相互交流,彼此吸引,共同协作完成一些有意思的事情.这也是中国软件行业的一大福音,尽管Github行业老大地位依旧固若金汤,但中国的IT从业者往往会苦恼于需要漂洋过海的fork项目,有了<a href="https://coding.net/" target="_blank" rel="external">Coding</a>后,这一现状可能会有所改变</p>
-<h2 id="Coding中支持的SSH公钥"><a href="#Coding中支持的SSH公钥" class="headerlink" title="Coding中支持的SSH公钥"></a>Coding中支持的SSH公钥</h2><h3 id="账户公钥"><a href="#账户公钥" class="headerlink" title="账户公钥"></a><strong>账户公钥</strong></h3><p>账户SSH公钥是跟用户账户关联的公钥，一旦设置，就拥有账户下所有项目仓库的读写权限。  </p>
-<h5 id="生成公钥"><a href="#生成公钥" class="headerlink" title="生成公钥"></a>生成公钥</h5><p>打开命令行终端输入如下代码,其中@后为注册时使用邮箱,接下来点击enter键即可(也可以输入密码).</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C “username@example.com”</div></pre></td></tr></table></figure>
-<p><img src="/assets/blogImg/ssh-1.png" alt="">  </p>
-<blockquote>
-<font color="00CED1"><strong>成功之后</strong></font>
-
-</blockquote>
-<p><img src="/assets/blogImg/ssh-2.png" alt="">  </p>
-<h5 id="给Coding账户添加公钥"><a href="#给Coding账户添加公钥" class="headerlink" title="给Coding账户添加公钥"></a>给Coding账户添加公钥</h5><p>本地打开id_rsa.pub文件,复制其中全部内容,填写到SSH_RSA公钥key下的一栏，公钥名称可随意。  </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">打开文件命令 cat /Users/macxie/.ssh/id_rsa.pub</div></pre></td></tr></table></figure>
-<p><img src="/assets/blogImg/ssh-3.png" alt=""></p>
-<p>SSH公钥填写页<br><img src="/assets/blogImg/ssh-4.png" alt="">  </p>
-<p>配置结束,测试<br><img src="/assets/blogImg/ssh-5.png" alt=""></p>
-<blockquote>
-<p><font color="00CED1"><strong>NOTE</strong></font><br>同一个公钥只能绑定一个账户,Coding暂时不支持同一公钥绑定多个账户.</p>
-</blockquote>
-<h3 id="项目部署公钥"><a href="#项目部署公钥" class="headerlink" title="项目部署公钥"></a><strong>项目部署公钥</strong></h3><p>项目部署SSH公钥是跟项目关联的公钥,设置后有该项目的仓库的只读权限.添加方式和账户公钥方式一样.<br><img src="/assets/blogImg/ssh-6.png" alt=""></p>
+        <h3 id="Jenkins项目构建发布指南"><a href="#Jenkins项目构建发布指南" class="headerlink" title="Jenkins项目构建发布指南"></a>Jenkins项目构建发布指南</h3><h4 id="内容摘要"><a href="#内容摘要" class="headerlink" title="内容摘要"></a>内容摘要</h4><ol>
+<li>部署服务器环境</li>
+<li>登录jenkins</li>
+<li>new item 创建项目</li>
+<li>build now 构建项目</li>
+</ol>
+<h4 id="部署服务器环境"><a href="#部署服务器环境" class="headerlink" title="部署服务器环境"></a>部署服务器环境</h4><p>  开发环境选择d1-my-dev-001这台服务器, <strong>注意</strong> 在这台主机上新建的目录,如果需要远程主机访问,都应该是wosai属主和属组,否则在构建过程中执行脚本会遇到Permission Denied  </p>
+<ol>
+<li>通过跳板机登录到d1-my-dev-001主机,选择superuser权限</li>
+<li><p>sudo vi /app/bin/nginx/conf/sites-enabled/project-name.conf  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">  listen 80;</div><div class="line">  server_name redpacketlib.dev.shouqianba.com;</div><div class="line"></div><div class="line">  location / &#123;</div><div class="line">    proxy_pass http://127.0.0.1:5321;</div><div class="line">    proxy_set_header Host <span class="variable">$host</span>;</div><div class="line">    proxy_set_header X-real-ip <span class="variable">$remote_addr</span>;</div><div class="line">    proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>2.sudo vi /etc/supervisor/conf.d/project-name.conf  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[program:project-name]</div><div class="line"><span class="built_in">command</span>=java -Xms40m -Xmx512m -Dshouqianba.flavor=dev -Djetty.port=5321 -Djetty.logs=/app/<span class="built_in">log</span>/project-name -Djetty.home=/app/bin/project-name/jetty -Djava.io.tmpdir=/tmp -jar /app/bin/project-name/jetty/start.jar</div><div class="line">user=wosai</div><div class="line">autostart=<span class="literal">false</span></div><div class="line">autorestart=<span class="literal">false</span></div><div class="line">stdout_logfile=/app/<span class="built_in">log</span>/project-name/stdout.log</div><div class="line">stderr_logfile=/app/<span class="built_in">log</span>/project-name/stderr.log</div><div class="line">directory=/app/<span class="built_in">log</span>/project-name</div></pre></td></tr></table></figure>
+</li>
+<li><p>sudo mkdir /app/bin/project-name</p>
+</li>
+<li>sudo mkdir /app/log/project-name</li>
+<li>sudo cp -r /app/bin/任意项目/jetty /app/bin/project-name/</li>
+<li>sudo chown wosai:wosai /app/bin/project-name</li>
+<li>sudo nginx -t ## 检查一下nginx配置是否有域名冲突的问题</li>
+<li>sudo nginx -s reload ##重新加载nginx服务,使配置文件生效</li>
+<li>sudo supervisorctl update project-name ## linux进程管理器更新配置后的进程使之生效</li>
+</ol>
+<h4 id="登录Jenkins"><a href="#登录Jenkins" class="headerlink" title="登录Jenkins"></a>登录Jenkins</h4><p>  通过王伟提供的Jenkins账号,登录<a href="http://112.80.47.42:8888/" target="_blank" rel="external">Jenkins</a>.<br>  在选线卡中选择需要发布项目的主机,如 <strong>Develop ENV</strong></p>
+<h4 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h4><p>  选中主机后,在页面左上角有New Item选项,点击后开始创建项目.<br>  1.输入项目名称<br>  2.如果选择maven工具构建项目,则选择maven project<br>  2.1 为该项目选择源码仓库地址,一般放在gitlab中,输入https的地址即可<br>  2.2 为该项目设置构建生命周期,一般构建时的步骤是清空,编译,安装并发布,用 <strong>clean -u install deploy</strong> 命令<br>  2.3 设置项目发布后执行脚本Execute Shell,该脚本负责将构建好的war包发送到开发主机上相应的目录,如wosai@d1-my-dev-001:/app/bin/redpacket-lib/jetty/webapps/redpacket-lib.war<br>      发送成功后远程启动该项目<br>      如ssh -t -t wosai@d1-my-dev-001 ‘sudo supervisorctl start redpacket-lib’<br>      完整的执行脚本如下<br>      <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scp /var/lib/jenkins/<span class="built_in">jobs</span>/redpacket-lib/workspace/redparent-lib/target/redpacket-lib.war wosai@d1-my-dev-001:/app/bin/redpacket-lib/jetty/webapps/redpacket-lib.war</div><div class="line">ssh -t -t wosai@d1-my-dev-001 <span class="string">'sudo supervisorctl start redpacket-lib'</span></div></pre></td></tr></table></figure></p>
+<p>  2.4 配置结束点击 <strong>apply save</strong></p>
+<h4 id="构建项目"><a href="#构建项目" class="headerlink" title="构建项目"></a>构建项目</h4><p>   <strong>build now</strong> 开始构建<br>   点击正在运行中的项目,之后选择Console output可以查看构建日志</p>
 
       
     </div>
@@ -410,23 +410,13 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/SSH/" rel="tag"># SSH</a>
-          
-            <a href="/tags/RS/" rel="tag"># RS</a>
-          
-            <a href="/tags/Coding-net/" rel="tag"># Coding.net</a>
-          
-        </div>
-      
 
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/Hello-Atom/2015/12/11/" rel="next" title="Hello Atom">
-                <i class="fa fa-chevron-left"></i> Hello Atom
+              <a href="/面试/2017/02/14/" rel="next" title="面试">
+                <i class="fa fa-chevron-left"></i> 面试
               </a>
             
           </div>
@@ -434,10 +424,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/MongoDB-Cluster/2016/12/31/" rel="prev" title="MongoDB Cluster">
-                MongoDB Cluster <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -486,8 +472,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="Hexo博客托管之SSH公钥/2016/07/11/"
-           data-title="Hexo博客托管之SSH公钥" data-url="http://xpercent.coding.me/Hexo博客托管之SSH公钥/2016/07/11/">
+      <div class="ds-thread" data-thread-key="jenkins使用指南/2017/02/27/"
+           data-title="jenkins使用指南" data-url="http://xpercent.coding.me/jenkins使用指南/2017/02/27/">
       </div>
     
   </div>
@@ -584,7 +570,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#SSH公钥"><span class="nav-number">1.</span> <span class="nav-text">SSH公钥</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding"><span class="nav-number">2.</span> <span class="nav-text">Coding</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Coding中支持的SSH公钥"><span class="nav-number">3.</span> <span class="nav-text">Coding中支持的SSH公钥</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#账户公钥"><span class="nav-number">3.1.</span> <span class="nav-text">账户公钥</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#生成公钥"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">生成公钥</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#给Coding账户添加公钥"><span class="nav-number">3.1.0.2.</span> <span class="nav-text">给Coding账户添加公钥</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#项目部署公钥"><span class="nav-number">3.2.</span> <span class="nav-text">项目部署公钥</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jenkins项目构建发布指南"><span class="nav-number">1.</span> <span class="nav-text">Jenkins项目构建发布指南</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#内容摘要"><span class="nav-number">1.1.</span> <span class="nav-text">内容摘要</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#部署服务器环境"><span class="nav-number">1.2.</span> <span class="nav-text">部署服务器环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#登录Jenkins"><span class="nav-number">1.3.</span> <span class="nav-text">登录Jenkins</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建项目"><span class="nav-number">1.4.</span> <span class="nav-text">创建项目</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构建项目"><span class="nav-number">1.5.</span> <span class="nav-text">构建项目</span></a></li></ol></li></ol></div>
             
 
           </div>
