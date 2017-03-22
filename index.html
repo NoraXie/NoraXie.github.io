@@ -259,6 +259,134 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://xpercent.coding.me/SpringBoot细碎收纳/2017/03/22/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Xpercent">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/assets/blogImg/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Xpercent">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Xpercent" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/SpringBoot细碎收纳/2017/03/22/" itemprop="url">
+                  SpringBoot细碎收纳
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T15:46:26+08:00">
+                2017-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/SpringBoot细碎收纳/2017/03/22/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="SpringBoot细碎收纳/2017/03/22/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><p>正在使用切面去给公司的几个数据同步任务接入监控(这部分文档参考公司的wiki文档).记录一下细节.一言不和上代码.<a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/aop.html">官方参考文档</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wosai.assistant.aop;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.wosai.app.backend.monitor.api.bean.LogView;</div><div class="line"><span class="keyword">import</span> com.wosai.app.backend.monitor.client.service.NettyClientService;</div><div class="line"><span class="keyword">import</span> com.wosai.assistant.error.SSAException;</div><div class="line"><span class="keyword">import</span> groovy.util.logging.Slf4j;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.ProceedingJoinPoint;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Around;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</div><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</div><div class="line"></div><div class="line"><span class="comment">/**</div><div class="line"> * Created by macxie on 3/21/17.</div><div class="line"> */</span></div><div class="line"><span class="meta">@Aspect</span></div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="meta">@Slf</span>4j</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SyncV2Aspect</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Logger logger = LoggerFactory.getLogger(SyncV2Aspect.class);</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> NettyClientService nettyClientService;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> LogView logView = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Around</span>(<span class="string">"execution(* com.wosai.assistant.service.impl.CoreBizMigrationServiceImpl.findStoreByMtime(..)) ||"</span> +</div><div class="line">            <span class="string">"execution(* com.wosai.assistant.service.impl.CoreBizMigrationServiceImpl.findMerchantByMtime(..)) || "</span> +</div><div class="line">            <span class="string">"execution(* com.wosai.assistant.service.impl.SyncServiceImpl.syncUser(..)) || "</span> +</div><div class="line">            <span class="string">"execution(* com.wosai.assistant.service.impl.MigrationServiceImpl.migrateUsers(..)) || "</span> +</div><div class="line">            <span class="string">"execution(* com.wosai.assistant.service.impl.MigrationServiceImpl.migrateOrgCode(..))"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">monitorSync</span><span class="params">(ProceedingJoinPoint proceedingJoinPoint)</span></span>&#123;</div><div class="line">        logView = <span class="keyword">new</span> LogView();</div><div class="line">        Object proceed = <span class="keyword">null</span>;</div><div class="line">        String method = proceedingJoinPoint.getSignature().getName();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            logView.setStartTime(System.currentTimeMillis());</div><div class="line">            proceed = proceedingJoinPoint.proceed();</div><div class="line">            logView.setType(<span class="number">0</span>);</div><div class="line">            logView.setEndTime(System.currentTimeMillis());</div><div class="line">            logView.setServiceUrl(method);</div><div class="line">            logView.setServiceName(<span class="string">"sales-system-backend"</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</div><div class="line">            logView.setIsSuccess(<span class="keyword">false</span>);</div><div class="line">            logView.setEndTime(System.currentTimeMillis());</div><div class="line">            logger.error(<span class="string">"sync [&#123;&#125;] from core-business abnormal "</span>+ method);</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> SSAException(method,method);</div><div class="line">        &#125; <span class="keyword">finally</span>&#123;</div><div class="line">            nettyClientService.sendMessage(logView);</div><div class="line">            <span class="keyword">return</span> proceed;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/SpringBoot细碎收纳/2017/03/22/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://xpercent.coding.me/CRM项目乱相/2017/03/19/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -361,34 +489,17 @@
 
       
         
-          
-            <h1 id="CRM"><a href="#CRM" class="headerlink" title="CRM"></a>CRM</h1><h2 id="Spring-boot-properties"><a href="#Spring-boot-properties" class="headerlink" title="Spring boot properties"></a>Spring boot properties</h2><p><a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#common-application-properties" target="_blank" rel="external">Common properties</a></p>
+          <h1 id="CRM"><a href="#CRM" class="headerlink" title="CRM"></a>CRM</h1><h2 id="Spring-boot-properties"><a href="#Spring-boot-properties" class="headerlink" title="Spring boot properties"></a>Spring boot properties</h2><p><a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#common-application-properties">Common properties</a></p>
 <h2 id="商户密码的背景"><a href="#商户密码的背景" class="headerlink" title="商户密码的背景"></a>商户密码的背景</h2><p>1.0中存有商户密码,但是2.0没有商户密码.<br>而在2.0之后并没有使用过1.0的商户密码.<br>但是现在2.0需要先查询有没有商户密码,如果有则直接写入;没有则需要先获取商户密码后写入</p>
 <h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><h4 id="CRM商户入网"><a href="#CRM商户入网" class="headerlink" title="CRM商户入网"></a>CRM商户入网</h4><p>注册一个商户</p>
 <h4 id="入网成功后"><a href="#入网成功后" class="headerlink" title="入网成功后"></a>入网成功后</h4><p>CRM需要调用app-backend的接口生成一个商户密码,之后app就可以获取商户密码了.然后调短信提醒接口将商户信息发送给这个商户的手机短信模板是亦天写的,所以关于短信模板需要咨询亦天</p>
-<h2 id="对公银行的背景"><a href="#对公银行的背景" class="headerlink" title="对公银行的背景"></a>对公银行的背景</h2><p>银行私人账号:用户在前端输入银行卡号后可以直接获取开户行信息<br>对公账号:无法根据银行卡号获取相关的开户行</p>
-<h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><p>调用app-backend的rpc/backend接口,获取对公开户行,一共有175条<br>直接在前端显示太长,所以前端最好提供一个输入框,可以根据关键字查询到相关的银行.</p>
-<h2 id="商户入网的历史问题"><a href="#商户入网的历史问题" class="headerlink" title="商户入网的历史问题"></a>商户入网的历史问题</h2><p>商户入网仍然依赖于1.0的channel_code,一个channel_code代表一个BD.channel_code这个字段在1.0的channel表中.<br>1.0(核心业务系统和支付网关)中只存了store(门店)<br>2.0(核心业务系统和支付网关)中存有merchant(商户),store(门店)</p>
-<p>CRM主要管理Merchant与BD,BD与BD之间的关系<br>CRM将这几个的关系拆分成了organization,user,role.<br>organization维护着BD们的关系<br>user维护单个user的关系<br>role维护user的权限</p>
-<h3 id="1-0channel表-–-gt-CRM"><a href="#1-0channel表-–-gt-CRM" class="headerlink" title="1.0channel表 –&gt; CRM"></a>1.0channel表 –&gt; CRM</h3><p>这个过程依赖于长茂的dts,相当于监控1.0的store表,之后王浩将dts的同步数据拆分成organization,user,role放在mongodb中</p>
-<h3 id="2-0upay-core-–-gt-CRM"><a href="#2-0upay-core-–-gt-CRM" class="headerlink" title="2.0upay-core –&gt; CRM"></a>2.0upay-core –&gt; CRM</h3><p>organization,user,role 与 channel_code一一对应,而channel_code与store有关,只要获取到一个store就可以找到channel_code.<br>这个过程借助定时任务,每5分钟去同步2.0中的数据到CRM中,然后从2.0中拿到store,从而等到channel_code,从而在CRM中找到对应的user</p>
-<h2 id="CRM接入监控-2017-03-17-13-00-00"><a href="#CRM接入监控-2017-03-17-13-00-00" class="headerlink" title="CRM接入监控(2017-03-17 13:00:00)"></a>CRM接入监控(2017-03-17 13:00:00)</h2><p>APP将SQL,REDIS,内部服务,外部服务接入了监控系统,对于数据库的操作,内部服务的调用,外部服务的访问都能有图形化的监控.灿伟说最好将CRM也接入到监控系统,这也有助于我对CRM的整体了解,于是开始着手.</p>
-<blockquote>
-<p>注意事项:暂时sql不要接入监控，目前监控服务端部署在业务机器上面，资源有限。 –by 栋泉</p>
-</blockquote>
-<p>参考资料:<br>1.<a href="/Volumes/T/Wosai/监控/版本升级记录-使用必看.pdf">版本升级记录(使用必看)</a><br>2.<a href="/Volumes/T/Wosai/监控/APP监控服务接入指南.pdf">APP监控服务接入指南</a><br>3.<a href="/Volumes/T/Wosai/监控/APP监控服务使用指南.pdf">APP监控服务使用指南</a></p>
-<h2 id="CRM相关项目及数据库"><a href="#CRM相关项目及数据库" class="headerlink" title="CRM相关项目及数据库"></a>CRM相关项目及数据库</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>1.0升级到2.0后,大部分功能都已经迁移,但是商户入网还在使用channel_code.<br>1.0的channel表中只有store的概念,一个store对应多个channel_code.<br>2.0中去掉了channel_code,新增merchant表.表示一个merchant可以对应多个store.</p>
-<h3 id="引发的问题"><a href="#引发的问题" class="headerlink" title="引发的问题"></a>引发的问题</h3><p>BD在帮商户入网时,依然使用channel_code.而CRM和2.0中都没有冗余channel_code,导致仅通过CRM和2.0无法完成商户入网操作.</p>
-<h3 id="解决方案-2"><a href="#解决方案-2" class="headerlink" title="解决方案"></a>解决方案</h3><p>CRM同步2.0的merchant与store.因为channel_code在1.0中需要根据store去查询, 而2.0无法直接获取store,需要根据merchant查询.  </p>
-<p>CRM同步1.0的channel表,并将其拆分成organization,user和role三张表,同时将channel_code冗余在user表中.  </p>
-<p>只有完成数据同步后,BD在输入channel_code时,才可以在CRM中查找到相应的user,从而完成入网操作.<br>上述数据同步过程请参考<a href="file:///Volumes/T/Wosai/CRM/CRM数据同步关系.pdf" target="_blank" rel="external">CRM数据同步关系by王浩</a></p>
-<h3 id="同步数据库与相关项目"><a href="#同步数据库与相关项目" class="headerlink" title="同步数据库与相关项目"></a>同步数据库与相关项目</h3><p><img src="/assets/img/localImg/CRM数据库关联图.png" alt=""></p>
-<blockquote>
-<p>名词解释<br>DTS: 阿里云的数据同步技术,项目为<a href="https://git.wosai-inc.com/shouqianba/gw2-store-migrate" target="_blank" rel="external">gw2-store-migration</a><br>schedule: java的定时器</p>
-</blockquote>
-<p><img src="/assets/img/localImg/crm数据同步相关项目与表.png" alt=""></p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/CRM项目乱相/2017/03/19/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -659,22 +770,19 @@
 
       
         
-          
-            <h4 id="内容摘要"><a href="#内容摘要" class="headerlink" title="内容摘要"></a>内容摘要</h4><ol>
+          <h4 id="内容摘要"><a href="#内容摘要" class="headerlink" title="内容摘要"></a>内容摘要</h4><ol>
 <li>部署服务器环境  </li>
 <li>登录jenkins  </li>
 <li>new item 创建项目  </li>
 <li>build now 构建项目</li>
 </ol>
-<h4 id="部署服务器环境"><a href="#部署服务器环境" class="headerlink" title="部署服务器环境"></a>部署服务器环境</h4><p>开发环境选择d1-my-dev-001这台服务器, <strong>注意</strong> 在这台主机上新建的目录,如果需要远程主机访问,都应该是wosai属主和属组,否则在构建过程中执行脚本会遇到Permission Denied<br>1.通过跳板机登录到d1-my-dev-001主机,选择superuser权限<br>2.sudo vi /app/bin/nginx/conf/sites-enabled/project-name.conf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">  listen 80;</div><div class="line">  server_name redpacketlib.dev.shouqianba.com;</div><div class="line"></div><div class="line">  location / &#123;</div><div class="line">    proxy_pass http://127.0.0.1:5321;</div><div class="line">    proxy_set_header Host <span class="variable">$host</span>;</div><div class="line">    proxy_set_header X-real-ip <span class="variable">$remote_addr</span>;</div><div class="line">    proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>3.sudo vi /etc/supervisor/conf.d/project-name.conf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[program:project-name]</div><div class="line"><span class="built_in">command</span>=java -Xms40m -Xmx512m -Dshouqianba.flavor=dev -Djetty.port=5321 -Djetty.logs=/app/<span class="built_in">log</span>/project-name -Djetty.home=/app/bin/project-name/jetty -Djava.io.tmpdir=/tmp -jar /app/bin/project-name/jetty/start.jar</div><div class="line">user=wosai</div><div class="line">autostart=<span class="literal">false</span></div><div class="line">autorestart=<span class="literal">false</span></div><div class="line">stdout_logfile=/app/<span class="built_in">log</span>/project-name/stdout.log</div><div class="line">stderr_logfile=/app/<span class="built_in">log</span>/project-name/stderr.log</div><div class="line">directory=/app/<span class="built_in">log</span>/project-name</div></pre></td></tr></table></figure></p>
-<p>4.sudo mkdir /app/bin/project-name<br>5.sudo mkdir /app/log/project-name<br>6.sudo cp -r /app/bin/任意项目/jetty /app/bin/project-name/<br>7.sudo chown wosai:wosai /app/bin/project-name<br>8.sudo nginx -t ## 检查一下nginx配置是否有域名冲突的问题<br>9.sudo nginx -s reload ##重新加载nginx服务,使配置文件生效<br>10.sudo supervisorctl update project-name ## linux进程管理器更新配置后的进程使之生效  </p>
-<h4 id="登录Jenkins"><a href="#登录Jenkins" class="headerlink" title="登录Jenkins"></a>登录Jenkins</h4><p>  通过王伟提供的Jenkins账号,登录<a href="http://112.80.47.42:8888/" target="_blank" rel="external">Jenkins</a>.<br>  在选线卡中选择需要发布项目的主机,如 <strong>Develop ENV</strong></p>
-<h4 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h4><p>选中主机后,在页面左上角有New Item选项,点击后开始创建项目.<br>1.输入项目名称<br>2.如果选择maven工具构建项目,则选择maven project<br>  2.1 为该项目选择源码仓库地址,一般放在gitlab中,输入https的地址即可<br>  2.2 为该项目设置构建生命周期,一般构建时的步骤是清空,编译,安装并发布,用 <strong>clean -u install deploy</strong> 命令<br>  2.3 设置项目发布后执行脚本Execute Shell,该脚本负责将构建好的war包发送到开发主机上相应的目录,如wosai@d1-my-dev-001:/app/bin/redpacket-lib/jetty/webapps/redpacket-lib.war<br>      发送成功后远程启动该项目<br>      如ssh -t -t wosai@d1-my-dev-001 ‘sudo supervisorctl start redpacket-lib’<br>      完整的执行脚本如下<br>      <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">scp /var/lib/jenkins/<span class="built_in">jobs</span>/redpacket-lib/workspace/redparent-lib/target/redpacket-lib.war wosai@d1-my-dev-001:/app/bin/redpacket-lib/jetty/webapps/redpacket-lib.war</div><div class="line">ssh -t -t wosai@d1-my-dev-001 <span class="string">'sudo supervisorctl start redpacket-lib'</span></div></pre></td></tr></table></figure></p>
-<p>  2.4 配置结束点击 <strong>apply save</strong></p>
-<h4 id="构建项目"><a href="#构建项目" class="headerlink" title="构建项目"></a>构建项目</h4><p>   <strong>build now</strong> 开始构建<br>   点击正在运行中的项目,之后选择Console output可以查看构建日志</p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/jenkins使用指南/2017/02/27/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -795,178 +903,17 @@
 
       
         
-          
-            <h3 id="电话面试1"><a href="#电话面试1" class="headerlink" title="电话面试1"></a>电话面试1</h3><blockquote>
+          <h3 id="电话面试1"><a href="#电话面试1" class="headerlink" title="电话面试1"></a>电话面试1</h3><blockquote>
 <p>1SQL优化</p>
 </blockquote>
 <p>通过分表的方式提高查询<br>通过建索引的方式提高查询速度<br>场景1:<br>A和B都建了一个叫index的索引,A如何在使用时确定自己建立的是哪一个索引 ?<br>通过优化SQL语句本身提高查询速度<br>通过优化产品结构提高查询速度  </p>
-<blockquote>
-<p>Spring中的AOP</p>
-</blockquote>
-<p>场景2:<br>  一张表中存放在两台数据库服务器中,A对该表进行了修改操作,B对该表进行了新增操作,做到事务的一致性.</p>
-<blockquote>
-<p>redis缓存</p>
-</blockquote>
-<p>将读写比高的数据放入redis缓存中.<br>场景3:<br>当A用户在redis上查询一条数据后,B做了下单操作,这时如何保证redis上数据与本地数据库的数据一致性.</p>
-<blockquote>
-<p>高并发的处理方案</p>
-</blockquote>
-<p>高并发时,如何做网站的实时访问量统计?</p>
-<blockquote>
-<p>接触过其它缓存技术吗?</p>
-</blockquote>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><h4 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h4><blockquote>
-<p><font color="00CED1"><strong>场景</strong></font><br>一台MySQL，一台Redis，两台应用服务器，用户的数据存储持久化在MySQL中，缓存在Redis，有请求的时候从Redis中获取缓存的用户数据，有修改则同时修改MySQL和Redis中的数据。现在问题是：1.先保存到MySQL和先保存到Redis都面临着一个保存成功而另外一个保存失败的情况，这样，如何保证MySQL与Redis中的数据同步？2.两台应用服务器的并发访问，如何保证数据的安全性？</p>
-</blockquote>
-<p><strong>读Redis，写MySQL，同时消费MySQL binlog更新Redis<br>MySQL binlog增量订阅消费+消息队列+处理并把数据更新到redis</strong></p>
-<p>说个大概吧，我们热数据基本都是redis，增删改都是操作mysql，对于读是保存到redis，这样就涉及到数据同步操作，同步操作分为两大块，我们的叫法是，一个是全量(将全部数据一次写入到redis，时间几小时不等)，一个是增量（实时更新）。这里说的是增量，主要问题是即时性，因为增删改都是直接操作mysql变更都在MySQL（这里高并发的问题是用分库分表加外层的负载均衡） 所以我们的方向是读取binlog然后分析 ，利用消息推送到某服务器A，再进行分析，然后更新各台redis，消息推送工具用的是rabbitMQ，可设定某表的变更推送(分三类update insert delate 包含变更前后的数据)，这里有个问题是：mysql数据操作太频繁产生的推送可能会很多，所以分析处理脚本处理速度一定要跟得上（我用Python写，前期多线程（坑），后来改成多进程），还有一个问题是，对于mysql-redis的数据关系映射设定不要太复杂，一表对一表就行，数据组合交给业务层做，这样分析处理脚本不会太多负担，处理速度更快，而且操作redis也更简单，redis每个对应mysql数据表的可使用多端口多实例，redis是单线程而且这样对于redis的主从和负载均衡有利.对于服务器A 可以再给其它服务做一个数据表增量变更数据获取接口，利用数据纬度，获取时间段的变更数据。追加，对于订单类部分，都是完全使用mysql，这个做好数据服务器，DB，table，分区，的拆分就好了，看并发请求越多拆分越多。上面说太多都是屁话，其实就是MySQL binlog增量订阅消费+消息队列+处理并把数据更新到redis</p>
-<h4 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h4><h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><h4 id="shiro"><a href="#shiro" class="headerlink" title="shiro"></a>shiro</h4><h4 id="LVS"><a href="#LVS" class="headerlink" title="LVS"></a>LVS</h4><h4 id="QPS与并发数"><a href="#QPS与并发数" class="headerlink" title="QPS与并发数"></a>QPS与并发数</h4><p>系统吞度量要素：一个系统的吞度量（承压能力）与request对CPU的消耗、外部接口、IO等等紧密关联。单个reqeust 对CPU消耗越高，外部系统接口、IO影响速度越慢，系统吞吐能力越低，反之越高。<br>系统吞吐量几个重要参数：QPS（TPS）、并发数、响应时间<br>QPS（TPS）：每秒钟request/事务 数量<br>并发数： 系统同时处理的request/事务数<br>响应时间：  一般取平均响应时间</p>
-<h4 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h4><p>   感觉回答的面都能说出来,细节上的回答得差强人意.</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://xpercent.coding.me/墓草青青-银丝遍布/2017/02/09/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Xpercent">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/assets/blogImg/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Xpercent">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Xpercent" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/墓草青青-银丝遍布/2017/02/09/" itemprop="url">
-                  墓草青青 银丝遍布
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-09T23:54:32+08:00">
-                2017-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/写给墓中人/" itemprop="url" rel="index">
-                    <span itemprop="name">写给墓中人</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/墓草青青-银丝遍布/2017/02/09/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="墓草青青-银丝遍布/2017/02/09/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>1.寂寞的表达之佼佼者,男有王家卫,女有亦舒.二者都喜欢借助俊男美女提升寂寞一词的品位.在我看来,寂寞不过是一种心理寄托可望而不可求时的情绪罢了.只不过,亦舒专注于强调女性的独立,王家卫侧重于男女人物的内心挣扎居多.</p>
-<p>2.很多人说自己爱旅行.以为带着一台相机,一副太阳镜,便是一场与美好的相约.我虽也向往旅游,但不敢说爱.只因旅行需要的知识\体力\时间成本让我望而生畏.我</p>
-
-          
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/面试/2017/02/14/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1039,7 +986,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

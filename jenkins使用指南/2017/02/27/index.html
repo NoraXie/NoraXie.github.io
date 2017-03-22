@@ -88,9 +88,7 @@
 部署服务器环境  
 登录jenkins  
 new item 创建项目  
-build now 构建项目
-
-部署服务器环境开发环境选择d1-my-dev-001这台服务器, 注意 在这台主机上新建的目录,如果需要远程主机访问,都应该是wosai属主和属组,否则在构建过程中执行脚本会遇到Permission Denied1.通过跳板机登录到d1-my-dev-001主机,选择superus">
+build now 构建项目">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jenkins项目构建发布指南">
 <meta property="og:url" content="http://xpercent.coding.me/jenkins使用指南/2017/02/27/index.html">
@@ -99,19 +97,15 @@ build now 构建项目
 部署服务器环境  
 登录jenkins  
 new item 创建项目  
-build now 构建项目
-
-部署服务器环境开发环境选择d1-my-dev-001这台服务器, 注意 在这台主机上新建的目录,如果需要远程主机访问,都应该是wosai属主和属组,否则在构建过程中执行脚本会遇到Permission Denied1.通过跳板机登录到d1-my-dev-001主机,选择superus">
-<meta property="og:updated_time" content="2017-03-13T05:56:52.000Z">
+build now 构建项目">
+<meta property="og:updated_time" content="2017-03-22T07:50:09.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jenkins项目构建发布指南">
 <meta name="twitter:description" content="内容摘要
 部署服务器环境  
 登录jenkins  
 new item 创建项目  
-build now 构建项目
-
-部署服务器环境开发环境选择d1-my-dev-001这台服务器, 注意 在这台主机上新建的目录,如果需要远程主机访问,都应该是wosai属主和属组,否则在构建过程中执行脚本会遇到Permission Denied1.通过跳板机登录到d1-my-dev-001主机,选择superus">
+build now 构建项目">
 
 
 
@@ -362,6 +356,7 @@ build now 构建项目
 <li>new item 创建项目  </li>
 <li>build now 构建项目</li>
 </ol>
+<a id="more"></a>
 <h4 id="部署服务器环境"><a href="#部署服务器环境" class="headerlink" title="部署服务器环境"></a>部署服务器环境</h4><p>开发环境选择d1-my-dev-001这台服务器, <strong>注意</strong> 在这台主机上新建的目录,如果需要远程主机访问,都应该是wosai属主和属组,否则在构建过程中执行脚本会遇到Permission Denied<br>1.通过跳板机登录到d1-my-dev-001主机,选择superuser权限<br>2.sudo vi /app/bin/nginx/conf/sites-enabled/project-name.conf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">  listen 80;</div><div class="line">  server_name redpacketlib.dev.shouqianba.com;</div><div class="line"></div><div class="line">  location / &#123;</div><div class="line">    proxy_pass http://127.0.0.1:5321;</div><div class="line">    proxy_set_header Host <span class="variable">$host</span>;</div><div class="line">    proxy_set_header X-real-ip <span class="variable">$remote_addr</span>;</div><div class="line">    proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>3.sudo vi /etc/supervisor/conf.d/project-name.conf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">[program:project-name]</div><div class="line"><span class="built_in">command</span>=java -Xms40m -Xmx512m -Dshouqianba.flavor=dev -Djetty.port=5321 -Djetty.logs=/app/<span class="built_in">log</span>/project-name -Djetty.home=/app/bin/project-name/jetty -Djava.io.tmpdir=/tmp -jar /app/bin/project-name/jetty/start.jar</div><div class="line">user=wosai</div><div class="line">autostart=<span class="literal">false</span></div><div class="line">autorestart=<span class="literal">false</span></div><div class="line">stdout_logfile=/app/<span class="built_in">log</span>/project-name/stdout.log</div><div class="line">stderr_logfile=/app/<span class="built_in">log</span>/project-name/stderr.log</div><div class="line">directory=/app/<span class="built_in">log</span>/project-name</div></pre></td></tr></table></figure></p>
 <p>4.sudo mkdir /app/bin/project-name<br>5.sudo mkdir /app/log/project-name<br>6.sudo cp -r /app/bin/任意项目/jetty /app/bin/project-name/<br>7.sudo chown wosai:wosai /app/bin/project-name<br>8.sudo nginx -t ## 检查一下nginx配置是否有域名冲突的问题<br>9.sudo nginx -s reload ##重新加载nginx服务,使配置文件生效<br>10.sudo supervisorctl update project-name ## linux进程管理器更新配置后的进程使之生效  </p>
@@ -502,7 +497,7 @@ build now 构建项目
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

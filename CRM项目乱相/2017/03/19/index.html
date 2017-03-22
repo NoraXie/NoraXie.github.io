@@ -98,7 +98,7 @@
 入网成功后CRM需要调用app-backend的接口生成一个商户密码,之后app就可">
 <meta property="og:image" content="http://xpercent.coding.me/assets/img/localImg/CRM数据库关联图.png">
 <meta property="og:image" content="http://xpercent.coding.me/assets/img/localImg/crm数据同步相关项目与表.png">
-<meta property="og:updated_time" content="2017-03-19T08:57:37.000Z">
+<meta property="og:updated_time" content="2017-03-22T07:49:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CRM项目乱相">
 <meta name="twitter:description" content="CRMSpring boot propertiesCommon properties
@@ -372,6 +372,7 @@
 <h2 id="商户密码的背景"><a href="#商户密码的背景" class="headerlink" title="商户密码的背景"></a>商户密码的背景</h2><p>1.0中存有商户密码,但是2.0没有商户密码.<br>而在2.0之后并没有使用过1.0的商户密码.<br>但是现在2.0需要先查询有没有商户密码,如果有则直接写入;没有则需要先获取商户密码后写入</p>
 <h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><h4 id="CRM商户入网"><a href="#CRM商户入网" class="headerlink" title="CRM商户入网"></a>CRM商户入网</h4><p>注册一个商户</p>
 <h4 id="入网成功后"><a href="#入网成功后" class="headerlink" title="入网成功后"></a>入网成功后</h4><p>CRM需要调用app-backend的接口生成一个商户密码,之后app就可以获取商户密码了.然后调短信提醒接口将商户信息发送给这个商户的手机短信模板是亦天写的,所以关于短信模板需要咨询亦天</p>
+<a id="more"></a>
 <h2 id="对公银行的背景"><a href="#对公银行的背景" class="headerlink" title="对公银行的背景"></a>对公银行的背景</h2><p>银行私人账号:用户在前端输入银行卡号后可以直接获取开户行信息<br>对公账号:无法根据银行卡号获取相关的开户行</p>
 <h3 id="解决方案-1"><a href="#解决方案-1" class="headerlink" title="解决方案"></a>解决方案</h3><p>调用app-backend的rpc/backend接口,获取对公开户行,一共有175条<br>直接在前端显示太长,所以前端最好提供一个输入框,可以根据关键字查询到相关的银行.</p>
 <h2 id="商户入网的历史问题"><a href="#商户入网的历史问题" class="headerlink" title="商户入网的历史问题"></a>商户入网的历史问题</h2><p>商户入网仍然依赖于1.0的channel_code,一个channel_code代表一个BD.channel_code这个字段在1.0的channel表中.<br>1.0(核心业务系统和支付网关)中只存了store(门店)<br>2.0(核心业务系统和支付网关)中存有merchant(商户),store(门店)</p>
@@ -428,6 +429,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/SpringBoot细碎收纳/2017/03/22/" rel="prev" title="SpringBoot细碎收纳">
+                SpringBoot细碎收纳 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -522,7 +527,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">17</span>
+              <span class="site-state-item-count">18</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
