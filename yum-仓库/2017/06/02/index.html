@@ -84,35 +84,17 @@
 
 
 
-<meta name="description" content="仓库虚拟机仓库虚拟机为repo
-repo仓库配置
-/etc/yum.repo.d/CentOs-Base.repo
-
-该文件中的baseurl选项决定了yum install时主要寻找的路径.baseurl最终指向repodata目录下的repomd.xml文件baseurl有三种配置方式.
-
-方式一: 网络上的镜像文件路径如阿里去的baseurl=http://aliyun.mirrors.co">
+<meta name="description" content="仓库虚拟机仓库虚拟机为repo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="yum 仓库">
 <meta property="og:url" content="http://xpercent.coding.me/yum-仓库/2017/06/02/index.html">
 <meta property="og:site_name" content="Xpercent">
-<meta property="og:description" content="仓库虚拟机仓库虚拟机为repo
-repo仓库配置
-/etc/yum.repo.d/CentOs-Base.repo
-
-该文件中的baseurl选项决定了yum install时主要寻找的路径.baseurl最终指向repodata目录下的repomd.xml文件baseurl有三种配置方式.
-
-方式一: 网络上的镜像文件路径如阿里去的baseurl=http://aliyun.mirrors.co">
+<meta property="og:description" content="仓库虚拟机仓库虚拟机为repo">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/repo_1.png">
-<meta property="og:updated_time" content="2017-06-01T17:48:35.000Z">
+<meta property="og:updated_time" content="2017-06-02T15:22:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="yum 仓库">
-<meta name="twitter:description" content="仓库虚拟机仓库虚拟机为repo
-repo仓库配置
-/etc/yum.repo.d/CentOs-Base.repo
-
-该文件中的baseurl选项决定了yum install时主要寻找的路径.baseurl最终指向repodata目录下的repomd.xml文件baseurl有三种配置方式.
-
-方式一: 网络上的镜像文件路径如阿里去的baseurl=http://aliyun.mirrors.co">
+<meta name="twitter:description" content="仓库虚拟机仓库虚拟机为repo">
 <meta name="twitter:image" content="http://xpercent.coding.me/assets/blogImg/repo_1.png">
 
 
@@ -359,16 +341,21 @@ repo仓库配置
 
       
         <h3 id="仓库虚拟机"><a href="#仓库虚拟机" class="headerlink" title="仓库虚拟机"></a>仓库虚拟机</h3><p>仓库虚拟机为repo</p>
+<a id="more"></a>
 <h3 id="repo仓库配置"><a href="#repo仓库配置" class="headerlink" title="repo仓库配置"></a>repo仓库配置</h3><blockquote>
 <p>/etc/yum.repo.d/CentOs-Base.repo</p>
 </blockquote>
-<p>该文件中的baseurl选项决定了yum install时主要寻找的路径.<br>baseurl最终指向repodata目录下的repomd.xml文件<br>baseurl有三种配置方式.</p>
+<p>该文件中的baseurl选项决定了yum install时主要寻找的路径.<br>baseurl最终指向repodata目录下的repomd.xml文件.<br>baseurl有三种配置方式.  </p>
 <ul>
 <li>方式一: 网络上的镜像文件路径如阿里去的baseurl=<a href="http://aliyun.mirrors.com" target="_blank" rel="external">http://aliyun.mirrors.com</a></li>
 <li>方式二: 本地文件,格式如baseurl=file:///~/repo/repodata/</li>
-<li>方式三: 自己搭一个repo服务器(通过nginx将自己的虚拟机搭成反向代理服务器,将这台主机暴露给互联网)<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#step1 设置主机名</span></div><div class="line">vim /etc/hosts</div><div class="line"><span class="comment"># 10.211.55.5 mirrors.pyum</span></div><div class="line">vim /etc/sysconfig/network</div><div class="line"><span class="comment"># HOSTNAME=mirrors.pyum</span></div><div class="line">vim /etc/yum.repo.d/CentOs-Base.repo</div><div class="line"><span class="comment"># baseurl=http://mirros.pyum/base/Packages/repodata</span></div></pre></td></tr></table></figure>
-</li>
+<li>方式三: 自己搭一个repo服务器(通过nginx将自己的虚拟机搭成反向代理服务器,将这台主机暴露给互联网)</li>
 </ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#step1 设置主机名</span></div><div class="line">vim /etc/hosts</div><div class="line"><span class="comment"># 10.211.55.5 mirrors.pyum</span></div><div class="line">vim /etc/sysconfig/network</div><div class="line"><span class="comment"># HOSTNAME=mirrors.pyum</span></div><div class="line">vim /etc/yum.repo.d/CentOs-Base.repo</div><div class="line"><span class="comment"># baseurl=http://mirros.pyum/base/Packages</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>本地使用的repo文件配置如下</p>
+</blockquote>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">[base]</div><div class="line">name=CentOS-<span class="variable">$releasever</span> - Base - mirrors.pyum</div><div class="line">baseurl=http://mirrors.pyum/base/Packages</div><div class="line">gpgcheck=0</div><div class="line"></div><div class="line"><span class="comment">#released updates</span></div><div class="line">[updates]</div><div class="line">name=CentOS-<span class="variable">$releasever</span> - Updates</div><div class="line">baseurl=http://mirrors.pyum/updates/Packages</div><div class="line">gpgcheck=0</div><div class="line"></div><div class="line"><span class="comment">#additional packages that may be useful</span></div><div class="line">[extras]</div><div class="line">name=CentOS-<span class="variable">$releasever</span> - Extras</div><div class="line">baseurl=http://mirrors.pyum/extras/Packages</div><div class="line">gpgcheck=0</div></pre></td></tr></table></figure>
 <h3 id="启动nginx"><a href="#启动nginx" class="headerlink" title="启动nginx"></a>启动nginx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx/sbin</div><div class="line">./nginx</div></pre></td></tr></table></figure>
 <h3 id="测试nginx是否可以访问"><a href="#测试nginx是否可以访问" class="headerlink" title="测试nginx是否可以访问"></a>测试nginx是否可以访问</h3><p>浏览器地址栏敲<a href="http://10.211.55.5" target="_blank" rel="external">http://10.211.55.5</a>, 显示结果如图<br><img src="/assets/blogImg/repo_1.png" alt=""></p>
 <h3 id="yum命令列表"><a href="#yum命令列表" class="headerlink" title="yum命令列表"></a>yum命令列表</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#yum check-update //检查可更新的rpm包</span></div><div class="line"><span class="comment">#yum list updates //列出资源库中所有可以更新的rpm包</span></div><div class="line"><span class="comment">#yum list extras //列出已安装但不包含在资源库中的rpm包</span></div><div class="line"><span class="comment">#yum search package //搜索匹配特定字符的rpm包</span></div><div class="line"><span class="comment">#yum install package //安装程序package</span></div><div class="line"><span class="comment">#yum remove package //删除程序package,包括与该程序有依赖性的包</span></div><div class="line"><span class="comment">#yum update package //更新程序package</span></div><div class="line"><span class="comment">#yum grouplist //列出所有的程序组</span></div><div class="line"><span class="comment">#yum groupinstall "Web Server" //安装程序组"Web Server"</span></div><div class="line"><span class="comment">#yum groupupdate groups //更新程序组groups</span></div><div class="line"><span class="comment">#yum groupremove groups //删除程序组groups</span></div><div class="line"><span class="comment">#yum localinstall package [--nogpgcheck] //安装本地程序package</span></div><div class="line"><span class="comment">#yum clean [all | packages | headers | oldheaders] //清除暂存中旧的rpm头文件和包文件</span></div><div class="line"><span class="comment">#yum deplist package //查看程序package的依赖关系</span></div><div class="line"><span class="comment">#yum info package //列出资源库中所有可以安装或更新的rpm包的信息。s</span></div></pre></td></tr></table></figure>
@@ -407,6 +394,10 @@ repo仓库配置
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Linux-Commands/2017/06/02/" rel="prev" title="Linux Commands">
+                Linux Commands <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -501,7 +492,7 @@ repo仓库配置
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -509,7 +500,7 @@ repo仓库配置
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -518,7 +509,7 @@ repo仓库配置
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">34</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
