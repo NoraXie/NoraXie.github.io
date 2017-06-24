@@ -99,7 +99,7 @@ Domain Name Service(DNS)名称解析服务, 实际上是在进行名称转换,�
 如:www.baidu.com,这是一个主机名, 它实际上有一个明确的定义叫Full Qualified Domain Name,即完全限定域名.这个主机名对应的真正域名是.com和.baidu.com.由此可知,其实域名,是指一定范围内主机名的集合.
 Domain Name Service(DNS)名称解析服务, 实际上是在进行名称转换,背后有">
 <meta property="og:image" content="http://xpercent.coding.me/assets/blogImg/DNS服务器搭建过程.png">
-<meta property="og:updated_time" content="2017-06-24T15:05:41.000Z">
+<meta property="og:updated_time" content="2017-06-24T17:21:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DNS详解">
 <meta name="twitter:description" content="DNS解析及DNS服务器的搭建什么是DNS
@@ -412,9 +412,11 @@ Domain Name Service(DNS)名称解析服务, 实际上是在进行名称转换,�
 <li>下级仅知道根的位置</li>
 <li>按Level管理域名</li>
 <li>TLD(Top Level Domain)<ul>
-<li>组织域: .com, .org, .net, .cc</li>
+<li>组织域: .com, .org, .net, .cc<ul>
 <li>国家域: .cn, .jp, .hk, .tw, .ca, .iq</li>
 <li>反向域: IP—&gt;FQDN</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -456,7 +458,7 @@ Domain Name Service(DNS)名称解析服务, 实际上是在进行名称转换,�
 <p>/etc/resolv.conf</p>
 </blockquote>
 <p>这个文件中的nameserver IP必须是允许递归的服务器地址,而stub resolver又是一个要求必须有应答的递归请求.因些,一旦写成不允许递归的IP, stub resolver将得不到应答.</p>
-<h5 id="DNS服务器"><a href="#DNS服务器" class="headerlink" title="DNS服务器"></a>DNS服务器</h5><p>不同的域名层级实际就是由一台一台的域名服务器组织起来的.</p>
+<h3 id="DNS服务器"><a href="#DNS服务器" class="headerlink" title="DNS服务器"></a>DNS服务器</h3><p>不同的域名层级实际就是由一台一台的域名服务器组织起来的.</p>
 <blockquote>
 <p>根服务器</p>
 </blockquote>
@@ -491,7 +493,7 @@ Domain Name Service(DNS)名称解析服务, 实际上是在进行名称转换,�
 <h3 id="DNS主机角色"><a href="#DNS主机角色" class="headerlink" title="DNS主机角色"></a>DNS主机角色</h3><p>所有域中的主机都有自己的角色,比如有的是邮件服务器,有的是www的服务器等等.</p>
 <p>在数据库中的每一个条目叫作一个资源记录,每条记录中的RRT(资源记录类型)字段用以区分这条记录最终要转换成什么.格式:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$TTL 600;</div><div class="line">NAME  TTL(可省略,但必须提供全局变量)    IN    RRT    VALUE</div><div class="line">www.baidu.com                       IN    A      1.1.1.1</div><div class="line">1.1.1.1                             IN    PTR    www.baidu.com</div></pre></td></tr></table></figure>
-<h5 id="资源记录类型RRT"><a href="#资源记录类型RRT" class="headerlink" title="资源记录类型RRT"></a>资源记录类型RRT</h5><p>用来表示这条记录要解析的值在DNS内部是什么角色.</p>
+<h3 id="资源记录类型RRT"><a href="#资源记录类型RRT" class="headerlink" title="资源记录类型RRT"></a>资源记录类型RRT</h3><p>用来表示这条记录要解析的值在DNS内部是什么角色.</p>
 <ul>
 <li>A</li>
 <li>AAAA</li>
@@ -664,12 +666,13 @@ Domain Name Service(DNS)名称解析服务, 实际上是在进行名称转换,�
 <p><strong>总结</strong><br>一条命令跟踪整个解析过程.</p>
 <figure class="highlight zsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">[root@os1 named]<span class="comment"># dig +trace -t A www.baidu.com</span></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.2rc1-RedHat-9.8.2-0.62.rc1.el6_9.2 &lt;&lt;&gt;&gt; +trace -t A www.baidu.com</div><div class="line">;; global options: +cmd</div><div class="line">.			517565	IN	NS	k.root-servers.net.</div><div class="line">.			517565	IN	NS	d.root-servers.net.</div><div class="line">.			517565	IN	NS	c.root-servers.net.</div><div class="line">.			517565	IN	NS	l.root-servers.net.</div><div class="line">.			517565	IN	NS	i.root-servers.net.</div><div class="line">.			517565	IN	NS	a.root-servers.net.</div><div class="line">.			517565	IN	NS	g.root-servers.net.</div><div class="line">.			517565	IN	NS	f.root-servers.net.</div><div class="line">.			517565	IN	NS	m.root-servers.net.</div><div class="line">.			517565	IN	NS	e.root-servers.net.</div><div class="line">.			517565	IN	NS	j.root-servers.net.</div><div class="line">.			517565	IN	NS	b.root-servers.net.</div><div class="line">.			517565	IN	NS	h.root-servers.net.</div><div class="line">;; Received 508 bytes from 10.211.55.200<span class="comment">#53(10.211.55.200) in 5 ms</span></div><div class="line"></div><div class="line">com.			172800	IN	NS	c.gtld-servers.net.</div><div class="line">com.			172800	IN	NS	j.gtld-servers.net.</div><div class="line">com.			172800	IN	NS	l.gtld-servers.net.</div><div class="line">com.			172800	IN	NS	f.gtld-servers.net.</div><div class="line">com.			172800	IN	NS	d.gtld-servers.net.</div><div class="line">com.			172800	IN	NS	a.gtld-servers.net.</div><div class="line">com.			172800	IN	NS	k.gtld-servers.net.</div><div class="line">com.			172800	IN	NS	i.gtld-servers.net.</div><div class="line">com.			172800	IN	NS	h.gtld-servers.net.</div><div class="line">com.			172800	IN	NS	m.gtld-servers.net.</div><div class="line">com.			172800	IN	NS	b.gtld-servers.net.</div><div class="line">com.			172800	IN	NS	g.gtld-servers.net.</div><div class="line">com.			172800	IN	NS	e.gtld-servers.net.</div><div class="line">;; Received 491 bytes from 192.33.4.12<span class="comment">#53(192.33.4.12) in 3170 ms</span></div><div class="line"></div><div class="line">baidu.com.		172800	IN	NS	dns.baidu.com.</div><div class="line">baidu.com.		172800	IN	NS	ns2.baidu.com.</div><div class="line">baidu.com.		172800	IN	NS	ns3.baidu.com.</div><div class="line">baidu.com.		172800	IN	NS	ns4.baidu.com.</div><div class="line">baidu.com.		172800	IN	NS	ns7.baidu.com.</div><div class="line">;; Received 201 bytes from 192.48.79.30<span class="comment">#53(192.48.79.30) in 116 ms</span></div><div class="line"></div><div class="line">www.baidu.com.		1200	IN	CNAME	www.a.shifen.com.</div><div class="line">a.shifen.com.		1200	IN	NS	ns2.a.shifen.com.</div><div class="line">a.shifen.com.		1200	IN	NS	ns1.a.shifen.com.</div><div class="line">a.shifen.com.		1200	IN	NS	ns5.a.shifen.com.</div><div class="line">a.shifen.com.		1200	IN	NS	ns4.a.shifen.com.</div><div class="line">a.shifen.com.		1200	IN	NS	ns3.a.shifen.com.</div><div class="line">;; Received 228 bytes from 220.181.38.10<span class="comment">#53(220.181.38.10) in 17 ms</span></div></pre></td></tr></table></figure>
 <blockquote>
-<p>数据传送<br>数据传送发生在主从DNS服务器结构的,所以前提是的至少有两台DNS服务器.然后申明主从身份.注意,数据传送可以用来分析服务器系统的结构, 这是不安全的做法.应该将允许传送的主机做一些限制.通过allow-transfer中列出的名单.</p>
+<p>数据传送</p>
+</blockquote>
+<p>数据传送发生在主从DNS服务器结构的,所以前提是的至少有两台DNS服务器.然后申明主从身份.注意,数据传送可以用来分析服务器系统的结构, 这是不安全的做法.应该将允许传送的主机做一些限制.通过allow-transfer中列出的名单.</p>
 <ul>
 <li>全量传送: axfr</li>
 <li>增量传送: ixfr</li>
 </ul>
-</blockquote>
 
       
     </div>
@@ -705,6 +708,10 @@ Domain Name Service(DNS)名称解析服务, 实际上是在进行名称转换,�
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/网络上常用的加密方式/2017/06/24/" rel="prev" title="网络上常用的加密方式">
+                网络上常用的加密方式 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -799,7 +806,7 @@ Domain Name Service(DNS)名称解析服务, 实际上是在进行名称转换,�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">23</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -807,7 +814,7 @@ Domain Name Service(DNS)名称解析服务, 实际上是在进行名称转换,�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -851,7 +858,7 @@ Domain Name Service(DNS)名称解析服务, 实际上是在进行名称转换,�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS解析及DNS服务器的搭建"><span class="nav-number">1.</span> <span class="nav-text">DNS解析及DNS服务器的搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是DNS"><span class="nav-number">1.1.</span> <span class="nav-text">什么是DNS</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#DNS服务器"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">DNS服务器</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS主机角色"><span class="nav-number">1.2.</span> <span class="nav-text">DNS主机角色</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#资源记录类型RRT"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">资源记录类型RRT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#还有一些概念"><span class="nav-number">1.3.</span> <span class="nav-text">还有一些概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS服务器搭建"><span class="nav-number">1.4.</span> <span class="nav-text">DNS服务器搭建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS主从复制"><span class="nav-number">2.</span> <span class="nav-text">DNS主从复制</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS解析及DNS服务器的搭建"><span class="nav-number">1.</span> <span class="nav-text">DNS解析及DNS服务器的搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是DNS"><span class="nav-number">1.1.</span> <span class="nav-text">什么是DNS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS服务器"><span class="nav-number">1.2.</span> <span class="nav-text">DNS服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS主机角色"><span class="nav-number">1.3.</span> <span class="nav-text">DNS主机角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源记录类型RRT"><span class="nav-number">1.4.</span> <span class="nav-text">资源记录类型RRT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#还有一些概念"><span class="nav-number">1.5.</span> <span class="nav-text">还有一些概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS服务器搭建"><span class="nav-number">1.6.</span> <span class="nav-text">DNS服务器搭建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS主从复制"><span class="nav-number">2.</span> <span class="nav-text">DNS主从复制</span></a></li></ol></div>
             
 
           </div>
