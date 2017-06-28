@@ -387,7 +387,7 @@
       
 
       
-        <h1 id="CRM"><a href="#CRM" class="headerlink" title="CRM"></a>CRM</h1><h2 id="Spring-boot-properties"><a href="#Spring-boot-properties" class="headerlink" title="Spring boot properties"></a>Spring boot properties</h2><p><a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#common-application-properties" target="_blank" rel="external">Common properties</a></p>
+        <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h1 id="CRM"><a href="#CRM" class="headerlink" title="CRM"></a>CRM</h1><h2 id="Spring-boot-properties"><a href="#Spring-boot-properties" class="headerlink" title="Spring boot properties"></a>Spring boot properties</h2><p><a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#common-application-properties" target="_blank" rel="external">Common properties</a></p>
 <h2 id="商户密码的背景"><a href="#商户密码的背景" class="headerlink" title="商户密码的背景"></a>商户密码的背景</h2><p>1.0中存有商户密码,但是2.0没有商户密码.<br>而在2.0之后并没有使用过1.0的商户密码.<br>但是现在2.0需要先查询有没有商户密码,如果有则直接写入;没有则需要先获取商户密码后写入</p>
 <h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><h4 id="CRM商户入网"><a href="#CRM商户入网" class="headerlink" title="CRM商户入网"></a>CRM商户入网</h4><p>注册一个商户</p>
 <h4 id="入网成功后"><a href="#入网成功后" class="headerlink" title="入网成功后"></a>入网成功后</h4><p>CRM需要调用app-backend的接口生成一个商户密码,之后app就可以获取商户密码了.然后调短信提醒接口将商户信息发送给这个商户的手机短信模板是亦天写的,所以关于短信模板需要咨询亦天</p>
