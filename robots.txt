@@ -11,4 +11,6 @@ Disallow: /vendors/
 Disallow: /fancybox/
 
 Sitemap: http://xpercent.tech/sitemap.xml
+Sitemap: http://www.xpercent.tech/sitemap.xml
 Sitemap: http://xpercent.tech/baidusitemap.xml
+Sitemap: http://www.xpercent.tech/baidusitemap.xml
