@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+    
+  <url>
+    <loc>http://xpercent.coding.me/%E7%94%9F%E5%A6%82%E8%9A%81%E8%80%8C%E7%BE%8E%E5%A6%82%E7%A5%9E/2017/06/28/</loc>
+    <lastmod>2017-06-28T20:25:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>生如蚁而美如神</title>
+        <pubTime>2017-06-28T10:20:15.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="随笔" url="http://xpercent.coding.me/categories/%E9%9A%8F%E7%AC%94/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://xpercent.coding.me/%E6%B8%85%E5%8D%8E%E5%A4%A7%E5%AD%A6%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%AA%8C%E5%B9%B3%E5%8F%B0%E6%90%AD%E5%BB%BA/2014/10/12/</loc>
+    <lastmod>2017-06-27T18:09:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>清华大学操作系统实验平台搭建</title>
+        <pubTime>2014-10-12T00:52:01.000Z</pubTime>
+        
+        <tag>uCore</tag>
+         
+        <tag>X86</tag>
+         
+        <tag>GNU/Linux</tag>
+         
+        <tag>QEMU</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://xpercent.coding.me/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/2017/06/24/</loc>
+    <lastmod>2017-06-25T12:05:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>网络安全</title>
+        <pubTime>2017-06-24T15:08:34.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="网络安全" url="http://xpercent.coding.me/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/DNS%E8%AF%A6%E8%A7%A3/2017/06/24/</loc>
+    <lastmod>2017-06-24T19:21:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>DNS详解</title>
+        <pubTime>2017-06-24T14:58:47.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="DNS" url="http://xpercent.coding.me/categories/DNS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/bug%E9%9B%86%E4%B8%AD%E8%90%A5/2014/01/01/</loc>
+    <lastmod>2017-06-11T09:34:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>bug集中营</title>
+        <pubTime>2014-01-01T12:51:40.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="bug与exceptions收集" url="http://xpercent.coding.me/categories/bug%E4%B8%8Eexceptions%E6%94%B6%E9%9B%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%8E%E7%BC%96%E7%A8%8B/2017/06/05/</loc>
+    <lastmod>2017-06-05T10:30:00.000Z</lastmod>
+    <data>
+        <display>
+        <title>计算机与编程</title>
+        <pubTime>2017-06-05T10:18:07.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="计算机系统组成" url="http://xpercent.coding.me/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E7%BB%84%E6%88%90/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/Linux-Commands/2017/06/02/</loc>
+    <lastmod>2017-06-04T07:47:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux Commands</title>
+        <pubTime>2017-06-02T09:57:25.000Z</pubTime>
+        
+        <tag>linux</tag>
+         
+         
+           
+             
+              <breadCrumb title="运维" url="http://xpercent.coding.me/categories/%E8%BF%90%E7%BB%B4/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/yum-%E4%BB%93%E5%BA%93/2017/06/02/</loc>
+    <lastmod>2017-06-02T15:22:48.000Z</lastmod>
+    <data>
+        <display>
+        <title>yum 仓库</title>
+        <pubTime>2017-06-01T17:23:50.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/OAuth%E4%B8%8EJWT%E7%9A%84%E7%A2%B0%E6%92%9E%E7%81%AB%E8%8A%B1/2017/04/02/</loc>
+    <lastmod>2017-04-03T06:38:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>OAuth与JWT的碰撞火花</title>
+        <pubTime>2017-04-02T02:10:56.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="授权与交互" url="http://xpercent.coding.me/categories/%E6%8E%88%E6%9D%83%E4%B8%8E%E4%BA%A4%E4%BA%92/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/SpringBoot%E7%BB%86%E7%A2%8E%E6%94%B6%E7%BA%B3/2017/03/22/</loc>
+    <lastmod>2017-03-22T08:22:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>SpringBoot细碎收纳</title>
+        <pubTime>2017-03-22T07:46:26.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/%E9%9D%A2%E8%AF%95/2017/02/14/</loc>
+    <lastmod>2017-03-22T07:50:23.000Z</lastmod>
+    <data>
+        <display>
+        <title>面试</title>
+        <pubTime>2017-02-14T09:22:33.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/jenkins%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/2017/02/27/</loc>
+    <lastmod>2017-03-22T07:50:09.000Z</lastmod>
+    <data>
+        <display>
+        <title>Jenkins项目构建发布指南</title>
+        <pubTime>2017-02-27T05:38:46.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/CRM%E9%A1%B9%E7%9B%AE%E4%B9%B1%E7%9B%B8/2017/03/19/</loc>
+    <lastmod>2017-03-22T07:49:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>CRM项目乱相</title>
+        <pubTime>2017-03-19T08:38:10.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="工作" url="http://xpercent.coding.me/categories/%E5%B7%A5%E4%BD%9C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/HTTP-access-control-CORS-%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82Bug/2017/03/09/</loc>
+    <lastmod>2017-03-09T06:54:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>HTTP access control(CORS)跨域请求Bug</title>
+        <pubTime>2017-03-09T06:53:30.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="HTTP跨域请求" url="http://xpercent.coding.me/categories/HTTP%E8%B7%A8%E5%9F%9F%E8%AF%B7%E6%B1%82/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/jenkins%20web%20%E5%8F%91%E5%B8%83%E6%8C%87%E5%8D%97/2017/02/27/</loc>
+    <lastmod>2017-02-27T04:58:42.000Z</lastmod>
+    <data>
+        <display>
+        <title></title>
+        <pubTime>2017-02-27T04:06:22.000Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/%E5%A2%93%E8%8D%89%E9%9D%92%E9%9D%92-%E9%93%B6%E4%B8%9D%E9%81%8D%E5%B8%83/2017/02/09/</loc>
+    <lastmod>2017-02-10T16:31:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>墓草青青 银丝遍布</title>
+        <pubTime>2017-02-09T15:54:32.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="写给墓中人" url="http://xpercent.coding.me/categories/%E5%86%99%E7%BB%99%E5%A2%93%E4%B8%AD%E4%BA%BA/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/Tenginx%E5%AE%89%E8%A3%85%E8%AE%B0%E5%BD%95/2015/08/13/</loc>
+    <lastmod>2017-01-09T11:24:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>Tengine安装记录</title>
+        <pubTime>2015-08-13T10:59:19.000Z</pubTime>
+        
+        <tag>Nginx</tag>
+         
+        <tag>Centos</tag>
+         
+        <tag>GCC</tag>
+         
+         
+           
+             
+              <breadCrumb title="Tengine" url="http://xpercent.coding.me/categories/Tengine/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/MongoDB-Cluster/2016/12/31/</loc>
+    <lastmod>2017-01-09T11:23:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>MongoDB Cluster</title>
+        <pubTime>2016-12-31T05:57:47.000Z</pubTime>
+        
+        <tag>mongodb architecture</tag>
+         
+        <tag>replica sets</tag>
+         
+         
+           
+             
+              <breadCrumb title="NoSQL" url="http://xpercent.coding.me/categories/NoSQL/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/Linux%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/2015/08/15/</loc>
+    <lastmod>2017-01-09T11:19:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux网络基础</title>
+        <pubTime>2015-08-15T10:51:47.000Z</pubTime>
+        
+        <tag>TCP/IP</tag>
+         
+        <tag>路由表</tag>
+         
+        <tag>交换机</tag>
+         
+        <tag>Mac地址</tag>
+         
+         
+           
+             
+              <breadCrumb title="计算机网络" url="http://xpercent.coding.me/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/Linux%E4%B8%8E%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%B5%85%E8%AF%86/2015/08/10/</loc>
+    <lastmod>2017-01-09T11:16:44.000Z</lastmod>
+    <data>
+        <display>
+        <title>Linux与操作系统浅识</title>
+        <pubTime>2015-08-10T15:17:30.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+        <tag>OS</tag>
+         
+        <tag>Kernel</tag>
+         
+        <tag>Shell</tag>
+         
+         
+           
+             
+              <breadCrumb title="操作系统" url="http://xpercent.coding.me/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/Hexo%E5%8D%9A%E5%AE%A2%E6%89%98%E7%AE%A1%E4%B9%8BSSH%E5%85%AC%E9%92%A5/2016/07/11/</loc>
+    <lastmod>2017-01-09T11:14:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo博客托管之SSH公钥</title>
+        <pubTime>2016-07-11T14:50:20.000Z</pubTime>
+        
+        <tag>SSH</tag>
+         
+        <tag>RS</tag>
+         
+        <tag>Coding.net</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hexo" url="http://xpercent.coding.me/categories/Hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/Hexo%E5%8D%9A%E5%AE%A2%E4%B9%8B%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D/2015/07/13/</loc>
+    <lastmod>2017-01-09T11:12:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hexo博客之自定义域名</title>
+        <pubTime>2015-07-13T00:39:23.000Z</pubTime>
+        
+        <tag>域名</tag>
+         
+        <tag>Coding</tag>
+         
+        <tag>GitHub</tag>
+         
+        <tag>GoDaddy</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hexo" url="http://xpercent.coding.me/categories/Hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83Hadoop-Hbase%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA/2017/01/04/</loc>
+    <lastmod>2017-01-09T08:47:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>生产环境Hadoop+Hbase集群搭建</title>
+        <pubTime>2017-01-04T09:52:59.000Z</pubTime>
+        
+        <tag>-Hadoop -HDFS -Zookeeper -Hbase -ZKFC -JournalNode -Yarn</tag>
+         
+         
+           
+             
+              <breadCrumb title="大数据" url="http://xpercent.coding.me/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/2017/01/03/</loc>
+    <lastmod>2017-01-03T08:14:51.000Z</lastmod>
+    <data>
+        <display>
+        <title>分类算法</title>
+        <pubTime>2017-01-03T07:11:58.000Z</pubTime>
+        
+        <tag>AUC</tag>
+         
+        <tag>ROC曲线</tag>
+         
+        <tag>Recall</tag>
+         
+        <tag>Precision</tag>
+         
+        <tag>F-Measure</tag>
+         
+         
+           
+             
+              <breadCrumb title="分类算法" url="http://xpercent.coding.me/categories/%E5%88%86%E7%B1%BB%E7%AE%97%E6%B3%95/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/%E8%A7%A3%E8%AF%AD%E7%9A%84%E4%B8%8D%E8%AF%AD/2017/01/02/</loc>
+    <lastmod>2017-01-02T09:22:35.000Z</lastmod>
+    <data>
+        <display>
+        <title>解语的不语</title>
+        <pubTime>2017-01-02T08:31:39.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="不为人知的诗集" url="http://xpercent.coding.me/categories/%E4%B8%8D%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84%E8%AF%97%E9%9B%86/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B9%8B%E6%A0%88/2014/10/11/</loc>
+    <lastmod>2016-12-12T13:09:15.000Z</lastmod>
+    <data>
+        <display>
+        <title>数据结构之栈</title>
+        <pubTime>2014-10-11T12:55:25.000Z</pubTime>
+        
+        <tag>Stack</tag>
+         
+        <tag>DSA</tag>
+         
+         
+           
+             
+              <breadCrumb title="数据结构" url="http://xpercent.coding.me/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://xpercent.coding.me/Hello-Atom/2015/12/11/</loc>
+    <lastmod>2016-12-11T15:07:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>Hello Atom</title>
+        <pubTime>2015-12-11T13:47:17.000Z</pubTime>
+        
+        <tag>Atom</tag>
+         
+        <tag>markdown-write</tag>
+         
+         
+           
+             
+              <breadCrumb title="Atom" url="http://xpercent.coding.me/categories/Atom/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+</urlset>
