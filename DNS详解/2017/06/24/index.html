@@ -103,7 +103,7 @@ Domain Name Service(DNS)名称解析服务, 实际上是在进行名称转换,�
 如:www.baidu.com,这是一个主机名, 它实际上有一个明确的定义叫Full Qualified Domain Name,即完全限定域名.这个主机名对应的真正域名是.com和.baidu.com.由此可知,其实域名,是指一定范围内主机名的集合.
 Domain Name Service(DNS)名称解析服务, 实际上是在进行名称转换,背后有">
 <meta property="og:image" content="http://xpercent.tech/assets/blogImg/DNS服务器搭建过程.png">
-<meta property="og:updated_time" content="2017-06-24T19:21:49.000Z">
+<meta property="og:updated_time" content="2017-06-30T13:54:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DNS详解">
 <meta name="twitter:description" content="DNS解析及DNS服务器的搭建什么是DNS
@@ -692,7 +692,110 @@ Domain Name Service(DNS)名称解析服务, 实际上是在进行名称转换,�
 <li>全量传送: axfr</li>
 <li>增量传送: ixfr</li>
 </ul>
-
+<h3 id="域名与博客"><a href="#域名与博客" class="headerlink" title="域名与博客"></a>域名与博客</h3><blockquote>
+<p>需求</p>
+</blockquote>
+<p>将xpercent.tech作为博客的访问入口</p>
+<blockquote>
+<p>准备工作</p>
+</blockquote>
+<ul>
+<li>托管在github/coding/远程服务器上的hexo博客</li>
+<li>github pages服务, repository中上传CNAME文件,内容为xpercent.tech</li>
+<li>coding pages服务, CNAME同上</li>
+</ul>
+<blockquote>
+<p>期望结果</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">hexo博客</th>
+<th style="text-align:center">域名</th>
+<th style="text-align:center">github pages</th>
+<th style="text-align:center">码市 pages</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="http://xpercent.tech">http://xpercent.tech</a></td>
+<td style="text-align:center">xpercent.tech</td>
+<td style="text-align:center">noraxie.github.io</td>
+<td style="text-align:center">xpercent.coding.me</td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="http://www.xpercent.tech" target="_blank" rel="external">http://www.xpercent.tech</a></td>
+<td style="text-align:center">xpercent.tech</td>
+<td style="text-align:center">noraxie.github.io</td>
+<td style="text-align:center">xpercent.coding.me</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>域名解析资源记录表</p>
+</blockquote>
+<p>选用DNSPod域名解析服务器.</p>
+<p><strong>区域名(ZONE NAME)</strong>: xpercent.tech</p>
+<p><strong>正向区域文件</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">ZONE NAME</th>
+<th style="text-align:center">RRT</th>
+<th style="text-align:center">IN</th>
+<th style="text-align:right">TTL</th>
+<th style="text-align:center">VALUE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">@</td>
+<td style="text-align:center">CNAME</td>
+<td style="text-align:center">IN</td>
+<td style="text-align:right">600</td>
+<td style="text-align:center">noraxie.github.io.</td>
+</tr>
+<tr>
+<td style="text-align:center">@</td>
+<td style="text-align:center">CNAME</td>
+<td style="text-align:center">IN</td>
+<td style="text-align:right">600</td>
+<td style="text-align:center">xpercent.coding.me.</td>
+</tr>
+<tr>
+<td style="text-align:center">@</td>
+<td style="text-align:center">NS</td>
+<td style="text-align:center">IN</td>
+<td style="text-align:right">86400</td>
+<td style="text-align:center">f1g1ns1.dnspod.net.</td>
+</tr>
+<tr>
+<td style="text-align:center">@</td>
+<td style="text-align:center">NS</td>
+<td style="text-align:center">IN</td>
+<td style="text-align:right">86400</td>
+<td style="text-align:center">f1g1ns1.dnspod.net.</td>
+</tr>
+<tr>
+<td style="text-align:center">www</td>
+<td style="text-align:center">CNAME</td>
+<td style="text-align:center">IN</td>
+<td style="text-align:right">600</td>
+<td style="text-align:center">noraxie.github.io.</td>
+</tr>
+<tr>
+<td style="text-align:center">www</td>
+<td style="text-align:center">CNAME</td>
+<td style="text-align:center">IN</td>
+<td style="text-align:right">600</td>
+<td style="text-align:center">xpercent.coding.me.</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>验证域名</p>
+</blockquote>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">➜  ~ dig @f1g1ns1.dnspod.net. xpercent.tech. CNAME</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.3-P1 &lt;&lt;&gt;&gt; @f1g1ns1.dnspod.net. xpercent.tech. CNAME</div><div class="line">; (5 servers found)</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 59769</div><div class="line">;; flags: qr aa rd; QUERY: 1, ANSWER: 1, AUTHORITY: 2, ADDITIONAL: 0</div><div class="line">;; WARNING: recursion requested but not available</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;xpercent.tech.			IN	CNAME</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">xpercent.tech.		600	IN	CNAME	noraxie.github.io.</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">xpercent.tech.		86400	IN	NS	f1g1ns2.dnspod.net.</div><div class="line">xpercent.tech.		86400	IN	NS	f1g1ns1.dnspod.net.</div><div class="line"></div><div class="line">;; Query time: 69 msec</div><div class="line">;; SERVER: 180.163.19.15<span class="comment">#53(180.163.19.15)</span></div><div class="line">;; WHEN: Fri Jun 30 17:59:30 2017</div><div class="line">;; MSG SIZE  rcvd: 126</div><div class="line"></div><div class="line">======================================================</div><div class="line"></div><div class="line">➜  ~ dig @f1g1ns1.dnspod.net. www.xpercent.tech. CNAME</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.3-P1 &lt;&lt;&gt;&gt; @f1g1ns1.dnspod.net. www.xpercent.tech. CNAME</div><div class="line">; (5 servers found)</div><div class="line">;; global options: +cmd</div><div class="line">;; Got answer:</div><div class="line">;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 13990</div><div class="line">;; flags: qr aa rd; QUERY: 1, ANSWER: 1, AUTHORITY: 2, ADDITIONAL: 0</div><div class="line">;; WARNING: recursion requested but not available</div><div class="line"></div><div class="line">;; QUESTION SECTION:</div><div class="line">;www.xpercent.tech.		IN	CNAME</div><div class="line"></div><div class="line">;; ANSWER SECTION:</div><div class="line">www.xpercent.tech.	600	IN	CNAME	xpercent.coding.me.</div><div class="line"></div><div class="line">;; AUTHORITY SECTION:</div><div class="line">xpercent.tech.		86400	IN	NS	f1g1ns1.dnspod.net.</div><div class="line">xpercent.tech.		86400	IN	NS	f1g1ns2.dnspod.net.</div><div class="line"></div><div class="line">;; Query time: 63 msec</div><div class="line">;; SERVER: 180.163.19.15<span class="comment">#53(180.163.19.15)</span></div><div class="line">;; WHEN: Fri Jun 30 18:00:08 2017</div><div class="line">;; MSG SIZE  rcvd: 131</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -877,7 +980,7 @@ Domain Name Service(DNS)名称解析服务, 实际上是在进行名称转换,�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS解析及DNS服务器的搭建"><span class="nav-number">1.</span> <span class="nav-text">DNS解析及DNS服务器的搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是DNS"><span class="nav-number">1.1.</span> <span class="nav-text">什么是DNS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS服务器"><span class="nav-number">1.2.</span> <span class="nav-text">DNS服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS主机角色"><span class="nav-number">1.3.</span> <span class="nav-text">DNS主机角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源记录类型RRT"><span class="nav-number">1.4.</span> <span class="nav-text">资源记录类型RRT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#还有一些概念"><span class="nav-number">1.5.</span> <span class="nav-text">还有一些概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS服务器搭建"><span class="nav-number">1.6.</span> <span class="nav-text">DNS服务器搭建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS主从复制"><span class="nav-number">2.</span> <span class="nav-text">DNS主从复制</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS解析及DNS服务器的搭建"><span class="nav-number">1.</span> <span class="nav-text">DNS解析及DNS服务器的搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是DNS"><span class="nav-number">1.1.</span> <span class="nav-text">什么是DNS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS服务器"><span class="nav-number">1.2.</span> <span class="nav-text">DNS服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS主机角色"><span class="nav-number">1.3.</span> <span class="nav-text">DNS主机角色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资源记录类型RRT"><span class="nav-number">1.4.</span> <span class="nav-text">资源记录类型RRT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#还有一些概念"><span class="nav-number">1.5.</span> <span class="nav-text">还有一些概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS服务器搭建"><span class="nav-number">1.6.</span> <span class="nav-text">DNS服务器搭建</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS主从复制"><span class="nav-number">2.</span> <span class="nav-text">DNS主从复制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#域名与博客"><span class="nav-number">2.1.</span> <span class="nav-text">域名与博客</span></a></li></ol></li></ol></div>
             
 
           </div>
