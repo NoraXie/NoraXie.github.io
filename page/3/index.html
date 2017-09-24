@@ -273,6 +273,283 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://xpercent.tech/SpringBoot细碎收纳/2017/03/22/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Xpercent">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/assets/blogImg/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Xpercent">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Xpercent" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/SpringBoot细碎收纳/2017/03/22/" itemprop="url">
+                  SpringBoot细碎收纳
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-22T15:46:26+08:00">
+                2017-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/SpringBoot细碎收纳/2017/03/22/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="SpringBoot细碎收纳/2017/03/22/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><p>正在使用切面去给公司的几个数据同步任务接入监控(这部分文档参考公司的wiki文档).记录一下细节.一言不和上代码.<a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/aop.html">官方参考文档</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.wosai.assistant.aop;</div><div class="line"></div><div class="line"><span class="keyword">import</span> com.wosai.app.backend.monitor.api.bean.LogView;</div><div class="line"><span class="keyword">import</span> com.wosai.app.backend.monitor.client.service.NettyClientService;</div><div class="line"><span class="keyword">import</span> com.wosai.assistant.error.SSAException;</div><div class="line"><span class="keyword">import</span> groovy.util.logging.Slf4j;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.ProceedingJoinPoint;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Around;</div><div class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</div><div class="line"><span class="keyword">import</span> org.slf4j.Logger;</div><div class="line"><span class="keyword">import</span> org.slf4j.LoggerFactory;</div><div class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</div><div class="line"></div><div class="line"><span class="comment">/**</div><div class="line"> * Created by macxie on 3/21/17.</div><div class="line"> */</span></div><div class="line"><span class="meta">@Aspect</span></div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="meta">@Slf</span>4j</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SyncV2Aspect</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> Logger logger = LoggerFactory.getLogger(SyncV2Aspect.class);</div><div class="line"></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> NettyClientService nettyClientService;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> LogView logView = <span class="keyword">null</span>;</div><div class="line"></div><div class="line">    <span class="meta">@Around</span>(<span class="string">"execution(* com.wosai.assistant.service.impl.CoreBizMigrationServiceImpl.findStoreByMtime(..)) ||"</span> +</div><div class="line">            <span class="string">"execution(* com.wosai.assistant.service.impl.CoreBizMigrationServiceImpl.findMerchantByMtime(..)) || "</span> +</div><div class="line">            <span class="string">"execution(* com.wosai.assistant.service.impl.SyncServiceImpl.syncUser(..)) || "</span> +</div><div class="line">            <span class="string">"execution(* com.wosai.assistant.service.impl.MigrationServiceImpl.migrateUsers(..)) || "</span> +</div><div class="line">            <span class="string">"execution(* com.wosai.assistant.service.impl.MigrationServiceImpl.migrateOrgCode(..))"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">monitorSync</span><span class="params">(ProceedingJoinPoint proceedingJoinPoint)</span></span>&#123;</div><div class="line">        logView = <span class="keyword">new</span> LogView();</div><div class="line">        Object proceed = <span class="keyword">null</span>;</div><div class="line">        String method = proceedingJoinPoint.getSignature().getName();</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            logView.setStartTime(System.currentTimeMillis());</div><div class="line">            proceed = proceedingJoinPoint.proceed();</div><div class="line">            logView.setType(<span class="number">0</span>);</div><div class="line">            logView.setEndTime(System.currentTimeMillis());</div><div class="line">            logView.setServiceUrl(method);</div><div class="line">            logView.setServiceName(<span class="string">"sales-system-backend"</span>);</div><div class="line">        &#125; <span class="keyword">catch</span> (Throwable e) &#123;</div><div class="line">            logView.setIsSuccess(<span class="keyword">false</span>);</div><div class="line">            logView.setEndTime(System.currentTimeMillis());</div><div class="line">            logger.error(<span class="string">"sync [&#123;&#125;] from core-business abnormal "</span>+ method);</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> SSAException(method,method);</div><div class="line">        &#125; <span class="keyword">finally</span>&#123;</div><div class="line">            nettyClientService.sendMessage(logView);</div><div class="line">            <span class="keyword">return</span> proceed;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/SpringBoot细碎收纳/2017/03/22/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://xpercent.tech/CRM项目乱相/2017/03/19/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Xpercent">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/assets/blogImg/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Xpercent">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Xpercent" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/CRM项目乱相/2017/03/19/" itemprop="url">
+                  CRM项目乱相
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-19T16:38:10+08:00">
+                2017-03-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/工作/" itemprop="url" rel="index">
+                    <span itemprop="name">工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/CRM项目乱相/2017/03/19/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="CRM项目乱相/2017/03/19/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="CRM"><a href="#CRM" class="headerlink" title="CRM"></a>CRM</h1><h2 id="Spring-boot-properties"><a href="#Spring-boot-properties" class="headerlink" title="Spring boot properties"></a>Spring boot properties</h2><p><a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#common-application-properties">Common properties</a></p>
+<h2 id="商户密码的背景"><a href="#商户密码的背景" class="headerlink" title="商户密码的背景"></a>商户密码的背景</h2><p>1.0中存有商户密码,但是2.0没有商户密码.<br>而在2.0之后并没有使用过1.0的商户密码.<br>但是现在2.0需要先查询有没有商户密码,如果有则直接写入;没有则需要先获取商户密码后写入</p>
+<h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><h4 id="CRM商户入网"><a href="#CRM商户入网" class="headerlink" title="CRM商户入网"></a>CRM商户入网</h4><p>注册一个商户</p>
+<h4 id="入网成功后"><a href="#入网成功后" class="headerlink" title="入网成功后"></a>入网成功后</h4><p>CRM需要调用app-backend的接口生成一个商户密码,之后app就可以获取商户密码了.然后调短信提醒接口将商户信息发送给这个商户的手机短信模板是亦天写的,所以关于短信模板需要咨询亦天</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/CRM项目乱相/2017/03/19/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://xpercent.tech/HTTP-access-control-CORS-跨域请求Bug/2017/03/09/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -697,280 +974,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://xpercent.tech/面试/2017/02/14/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Xpercent">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/assets/blogImg/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Xpercent">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Xpercent" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/面试/2017/02/14/" itemprop="url">
-                  面试
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-14T17:22:33+08:00">
-                2017-02-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/面试/2017/02/14/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="面试/2017/02/14/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="电话面试1"><a href="#电话面试1" class="headerlink" title="电话面试1"></a>电话面试1</h3><blockquote>
-<p>1SQL优化</p>
-</blockquote>
-<p>通过分表的方式提高查询<br>通过建索引的方式提高查询速度<br>场景1:<br>A和B都建了一个叫index的索引,A如何在使用时确定自己建立的是哪一个索引 ?<br>通过优化SQL语句本身提高查询速度<br>通过优化产品结构提高查询速度  </p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/面试/2017/02/14/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://xpercent.tech/墓草青青-银丝遍布/2017/02/09/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Xpercent">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/assets/blogImg/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="Xpercent">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="Xpercent" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/墓草青青-银丝遍布/2017/02/09/" itemprop="url">
-                  墓草青青 银丝遍布
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-02-09T23:54:32+08:00">
-                2017-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/写给墓中人/" itemprop="url" rel="index">
-                    <span itemprop="name">写给墓中人</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/墓草青青-银丝遍布/2017/02/09/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="墓草青青-银丝遍布/2017/02/09/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <link rel="stylesheet" type="text/css" href="/assets/css/DPlayer.min.css"><script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>1.寂寞的表达之佼佼者,男有王家卫,女有亦舒.二者都喜欢借助俊男美女提升寂寞一词的品位.在我看来,寂寞不过是一种心理寄托可望而不可求时的情绪罢了.只不过,亦舒专注于强调女性的独立,王家卫侧重于男女人物的内心挣扎居多.</p>
-<p>2.很多人说自己爱旅行.以为带着一台相机,一副太阳镜,便是一场与美好的相约.我虽也向往旅游,但不敢说爱.只因旅行需要的知识\体力\时间成本让我望而生畏.我</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1016,7 +1019,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-count">30</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1033,7 +1036,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-count">38</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
